@@ -39,12 +39,39 @@ body{display:flex;align-items:center;justify-content:center;}
 #yes-btn{font-family:var(--mono);font-size:clamp(14px,1.8vw,22px);font-weight:700;letter-spacing:5px;padding:clamp(10px,1.5vh,16px) clamp(32px,5vw,64px);background:var(--teal);color:#020e08;border:none;cursor:pointer;text-transform:uppercase;animation:fadeUp 0.6s 0.34s ease both,pulse 2.2s 1.2s ease-in-out infinite;opacity:0;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:background .15s,transform .1s;}
 #yes-btn:hover{background:#00ffaa;transform:scale(1.04);}
 .s-tip{font-family:var(--mono);font-size:clamp(8px,1vw,11px);color:rgba(80,110,130,0.8);letter-spacing:1px;animation:fadeUp 0.6s 0.5s ease both;opacity:0;}
+
+#hs-btn{position:fixed;bottom:22px;left:22px;z-index:110;width:clamp(46px,5vw,58px);height:clamp(46px,5vw,58px);border-radius:50%;font-size:clamp(18px,2.2vw,24px);background:rgba(4,12,26,.9);color:var(--gold);border:2px solid var(--gold);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s;box-shadow:0 0 16px rgba(200,160,50,.2);}
+#hs-btn:hover{background:rgba(200,160,50,.12);transform:scale(1.1);}
+#hs-list{font-family:var(--mono);}
+.hs-entry{display:grid;grid-template-columns:2em 1fr auto auto;gap:6px 14px;align-items:center;padding:10px 12px;margin-bottom:6px;border:1px solid rgba(180,140,50,.2);background:rgba(10,12,24,.5);}
+.hs-rank{color:var(--gold);font-size:clamp(12px,1.5vw,16px);font-weight:700;}
+.hs-name{color:#d0d8e0;font-size:clamp(12px,1.5vw,15px);}
+.hs-level{color:#8888aa;font-size:clamp(10px,1.2vw,13px);}
+.hs-gold{color:var(--gold-bright);font-size:clamp(13px,1.6vw,17px);font-weight:700;text-align:right;}
+.hs-empty{color:#4a4a6a;font-size:clamp(12px,1.4vw,15px);padding:20px 0;text-align:center;}
+#htp-btn{position:fixed;bottom:22px;right:22px;z-index:110;width:clamp(46px,5vw,58px);height:clamp(46px,5vw,58px);border-radius:50%;font-family:var(--mono);font-size:clamp(18px,2.2vw,26px);font-weight:700;background:rgba(4,12,26,.9);color:var(--teal);border:2px solid var(--teal);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s;box-shadow:0 0 16px rgba(0,232,160,.25);}
+#htp-btn:hover{background:rgba(0,232,160,.15);transform:scale(1.1);}
 .s-embark{font-family:var(--mono);font-size:clamp(13px,1.6vw,18px);color:rgba(180,200,220,0.7);letter-spacing:4px;text-transform:uppercase;animation:fadeUp 0.6s 0.28s ease both;opacity:0;}
 
 
 #ov-stats{display:flex;gap:20px;align-items:center;margin-bottom:12px;padding:8px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);}
 #ov-hp{font-family:var(--mono);font-size:clamp(12px,1.5vw,16px);color:#d06060;letter-spacing:1px;}
 #ov-gold{font-family:var(--mono);font-size:clamp(12px,1.5vw,16px);color:#c9a84c;letter-spacing:1px;}
+
+
+#map-legend{width:clamp(130px,14vw,180px);}
+#legend-inner{background:rgba(4,6,18,.88);border:1px solid rgba(180,140,50,.3);border-right:none;padding:10px 10px 12px 12px;clip-path:polygon(0 0,100% 0,100% 100%,8px 100%,0 calc(100% - 8px));}
+.leg-title{font-family:var(--mono);font-size:clamp(8px,1vw,10px);color:rgba(180,140,50,.7);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(180,140,50,.2);}
+.leg-row{display:flex;align-items:center;gap:7px;margin-bottom:7px;}
+.leg-hex{font-family:var(--mono);font-size:clamp(10px,1.1vw,12px);font-weight:700;display:inline-flex;align-items:center;justify-content:center;width:clamp(32px,3.2vw,42px);height:clamp(28px,2.8vw,36px);flex-shrink:0;clip-path:polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);}
+.leg-lbl{font-family:var(--mono);font-size:clamp(9px,1vw,11px);color:rgba(180,190,200,.75);line-height:1.2;}
+.leg-easy{background:rgba(14,56,32,.9);color:#4ab070;border:0;}
+.leg-med{background:rgba(58,40,0,.9);color:#e0a020;border:0;}
+.leg-hard{background:rgba(58,8,8,.9);color:#e04040;border:0;}
+.leg-shop{background:rgba(26,12,56,.9);color:#c0a0ff;border:0;}
+.leg-tavern{background:rgba(48,24,8,.9);color:#e0b040;border:0;}
+.leg-event{background:rgba(24,10,48,.9);color:#c080ff;border:0;font-size:clamp(13px,1.4vw,17px);}
+.leg-boss{background:rgba(58,40,0,.9);color:#ffe060;border:0;font-size:clamp(13px,1.4vw,17px);}
 
 /* ─── HUD ─────────────────── */
 #hud{position:absolute;top:0;left:0;right:0;z-index:15;display:flex;justify-content:space-between;align-items:flex-start;padding:12px 18px 0;pointer-events:none;}
@@ -170,6 +197,8 @@ body{display:flex;align-items:center;justify-content:center;}
 .end-divider{height:1px;width:clamp(140px,28vw,280px);background:var(--border-gold);}
 .end-stats{font-family:var(--mono);font-size:clamp(11px,1.4vw,16px);color:#8a9a8a;line-height:2.2;}
 .end-btn-gold{font-family:var(--mono);font-size:clamp(12px,1.5vw,17px);padding:clamp(9px,1.4vh,14px) clamp(22px,3.5vw,44px);background:transparent;border:2px solid #c89828;color:#c89828;cursor:pointer;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);}
+.end-btn-retire{font-family:var(--mono);font-size:clamp(10px,1.3vw,15px);padding:clamp(8px,1.2vh,12px) clamp(18px,2.8vw,36px);background:transparent;border:1px solid #3a9050;color:#4ab060;cursor:pointer;transition:background .15s;}
+.end-btn-retire:hover{background:rgba(58,144,80,.15);}
 .end-btn-dim{font-family:var(--mono);font-size:clamp(10px,1.3vw,15px);padding:clamp(8px,1.2vh,12px) clamp(18px,2.8vw,36px);background:transparent;border:1px solid #4a4a6a;color:#7a7a9a;cursor:pointer;}
 .end-btn-red{font-family:var(--mono);font-size:clamp(10px,1.3vw,15px);padding:clamp(8px,1.2vh,12px) clamp(18px,2.8vw,36px);background:transparent;border:1px solid #8a2020;color:#c04040;cursor:pointer;}
 
@@ -202,10 +231,47 @@ body{display:flex;align-items:center;justify-content:center;}
     <div class="s-ready">R&nbsp;you&nbsp;ready?</div>
     <div class="s-embark">Embark on a journey</div>
     <button id="yes-btn" onclick="startGame()">YES</button>
+    <button id="hs-btn" onclick="openHighscores()" title="High Scores">🏆</button>
+<button id="htp-btn" onclick="document.getElementById('htp-modal').style.display='block'" title="How To Play">?</button>
     <div class="s-tip">face the unknown · defeat the data bosses · collect relics</div>
   </div>
 </div>
 
+
+<!-- HIGHSCORE MODAL -->
+<div id="hs-modal" style="display:none;position:absolute;inset:0;z-index:200;background:rgba(3,5,14,.97);overflow-y:auto;padding:clamp(24px,4vw,60px) clamp(20px,6vw,80px);">
+  <div style="max-width:680px;margin:0 auto;">
+    <div style="font-family:var(--mono);font-size:clamp(20px,3vw,36px);font-weight:700;color:var(--gold-bright);letter-spacing:4px;margin-bottom:6px;">HIGH SCORES</div>
+    <div style="font-family:var(--mono);font-size:clamp(9px,1.1vw,12px);color:var(--teal);letter-spacing:3px;text-transform:uppercase;margin-bottom:24px;">All recorded runs</div>
+    <div id="hs-list"></div>
+    <button onclick="document.getElementById('hs-modal').style.display='none';" style="margin-top:28px;font-family:var(--mono);font-size:clamp(13px,1.6vw,18px);padding:12px 36px;background:transparent;border:2px solid var(--gold);color:var(--gold);cursor:pointer;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);">CLOSE  ×</button>
+  </div>
+</div>
+
+<!-- HOW TO PLAY MODAL -->
+<div id="htp-modal" style="display:none;position:absolute;inset:0;z-index:200;background:rgba(3,5,14,.97);overflow-y:auto;padding:clamp(24px,4vw,60px) clamp(20px,6vw,80px);">
+  <div style="max-width:720px;margin:0 auto;">
+    <div id="htp-title" style="font-family:var(--mono);font-size:clamp(20px,3vw,36px);font-weight:700;color:var(--gold-bright);letter-spacing:4px;margin-bottom:6px;">HOW TO PLAY</div>
+    <div style="font-family:var(--mono);font-size:clamp(9px,1.1vw,12px);color:var(--teal);letter-spacing:3px;text-transform:uppercase;margin-bottom:28px;">R Quest — The Journey</div>
+    <div id="htp-body" style="font-family:var(--mono);font-size:clamp(12px,1.5vw,16px);color:#aabbc0;line-height:2;white-space:pre-wrap;"></div>
+    <button onclick="document.getElementById('htp-modal').style.display='none';" style="margin-top:32px;font-family:var(--mono);font-size:clamp(13px,1.6vw,18px);padding:12px 36px;background:transparent;border:2px solid var(--gold);color:var(--gold);cursor:pointer;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);">CLOSE  ×</button>
+  </div>
+</div>
+
+
+<!-- MAP LEGEND -->
+<div id="map-legend" style="display:none;position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:14;pointer-events:none;">
+  <div id="legend-inner">
+    <div class="leg-title">NODE GUIDE</div>
+    <div class="leg-row"><span class="leg-hex leg-easy">⚔★</span><span class="leg-lbl">Easy Battle</span></div>
+    <div class="leg-row"><span class="leg-hex leg-med">⚔★★</span><span class="leg-lbl">Medium Battle</span></div>
+    <div class="leg-row"><span class="leg-hex leg-hard">⚔★★★</span><span class="leg-lbl">Hard Battle</span></div>
+    <div class="leg-row"><span class="leg-hex leg-shop">🛒</span><span class="leg-lbl">Shop — buy items</span></div>
+    <div class="leg-row"><span class="leg-hex leg-tavern">🍺</span><span class="leg-lbl">Tavern — rest or race</span></div>
+    <div class="leg-row"><span class="leg-hex leg-event">?</span><span class="leg-lbl">Event — mystery</span></div>
+    <div class="leg-row"><span class="leg-hex leg-boss">★</span><span class="leg-lbl">Boss — final challenge</span></div>
+  </div>
+</div>
 <canvas id="mc"></canvas>
 <div id="dmg-blink"></div>
 <div id="gb"></div>
@@ -336,6 +402,7 @@ body{display:flex;align-items:center;justify-content:center;}
   <div class="end-divider"></div>
   <div id="win-txt" class="end-stats"></div>
   <button id="win-btn1" class="end-btn-gold" onclick="ascendNext()" style="display:none;"></button>
+  <button id="win-retire" class="end-btn-retire" onclick="retireRun()" style="display:none;">RETIRE  ◈  SAVE SCORE</button>
   <button class="end-btn-dim" onclick="goToStart()">PLAY AGAIN</button>
 </div>
 
@@ -406,47 +473,529 @@ const BOSS_CONFIGS={
 const BOSS_MAP_LABELS=['SOUR RON','KRACKER','DR.AKE'];
 const LEVEL_NAMES=['The Shrubbery','Toxic River','The Final Frontier'];
 
-// ══ Questions ══
-const QS1={
-  1:{badge:'WP·EASY',type:'mcq',q:'sum(c(2,4,6,8)) returns:',ch:['A) 14','B) 20','C) 8','D) Error'],ok:1,hint:'sum() adds all values.',ex:'Correct! ✓\n\nsum() adds every element in the vector.\n2+4+6+8 = 20'},
-  2:{badge:'WP·EASY',type:'mcq',q:'Most concise: create 1,2,3,4,5 in R:',ch:['A) seq(1,5)',  'B) c(1,2,3,4,5)','C) 1:5','D) int(1,5)'],ok:2,hint:'Colon operator for ranges.',ex:'Correct! ✓\n\nThe colon operator creates an integer sequence.\n1:5 expands to c(1L, 2L, 3L, 4L, 5L)'},
-  4:{badge:'WP·MED',type:'mcq',q:'Select column "height" from df:',ch:['A) df@height','B) df$height','C) df::height','D) df->height'],ok:1,hint:'Named element access.',ex:'Correct! ✓\n\n$ extracts named elements from a list/data frame.\ndf$height pulls out the height column as a vector.'},
-  5:{badge:'WP·EASY',type:'mcq',q:'nrow(df) returns:',ch:['A) Num columns','B) Col names','C) Num rows','D) Row indices'],ok:2,hint:'nrow = number of rows.',ex:'Correct! ✓\n\nnrow() counts rows, ncol() counts columns.\ndim(df) returns both: c(rows, cols).'},
-  6:{badge:'WP·MED',type:'mcq',q:'ggplot2: maps variables to visuals:',ch:['A) map()','B) theme()','C) aes()','D) scale()'],ok:2,hint:'aes = aesthetics.',ex:'Correct! ✓\n\naes() maps data columns to visual properties:\nx, y, color, size, shape, fill, and more.'},
-  7:{badge:'WP·MED',type:'mcq',q:'df|>group_by(sex)|>summarise(m=mean(age))\nreturns:',ch:['A) Filters by sex','B) Mean age per sex','C) Adds col m','D) Sorts rows'],ok:1,hint:'GROUP BY → aggregate.',ex:'Correct! ✓\n\ngroup_by(sex) splits rows into groups.\nsummarise(m=mean(age)) collapses each group to one row.'},
-  9:{badge:'WP·HARD',type:'mcq',q:'lapply() always returns:',ch:['A) A vector','B) A data frame','C) A list','D) A matrix'],ok:2,hint:'"l"=list.',ex:'Correct! ✓\n\nlapply() always returns a list, length = input length.\nUse sapply() if you want a simplified vector instead.'},
-  10:{badge:'WP·HARD',type:'text',q:'Body to return square of x:\nsquare <- function(x) { ___ }',ans:['return(x^2)','x^2','return(x*x)','x*x'],hint:'Last expression auto-returned.',ex:'Correct! ✓\n\nR functions return the last evaluated expression.\nreturn() is optional — x^2 alone works perfectly.'},
-  11:{badge:'WP·MED',type:'mcq',q:'paste() vs paste0():',ch:['A) paste0 faster','B) paste sep=" ", paste0 sep=""','C) paste0 max 2 args','D) Same'],ok:1,hint:'Default sep=?',ex:'Correct! ✓\n\npaste("a","b")  → "a b"  (sep=" " by default)\npaste0("a","b") → "ab"   (sep="" no separator)'},
-  12:{badge:'WP·HARD',type:'mcq',q:'lm(y~x, data=df) fits:',ch:['A) Logistic','B) Linear regression','C) t-test','D) Correlation'],ok:1,hint:'lm=linear model.',ex:'Correct! ✓\n\nlm() fits a linear model (Ordinary Least Squares).\ny ~ x: y is the response, x is the predictor.'},
-  13:{badge:'WP·HARD',type:'mcq',q:'Native pipe in base R ≥4.1:',ch:['A) %>%','B) ->>','C) |>','D) ::'],ok:2,hint:'Built-in since R 4.1.',ex:'Correct! ✓\n\n|> is the native R pipe, added in R 4.1 (2021).\nNo packages needed — unlike %>% from magrittr.'},
+// ══ Question Bank ══ (~100 questions across 3 levels × 3 difficulties) ══════
+// Format: id → {lvl, diff, type, q, ch, ok, hint, ex}
+// lvl: 1|2|3   diff: 'easy'|'medium'|'hard'   type: 'mcq'|'text'
+const QB={
+// ── Level 1 Easy ─────────────────────────────────────────────────────────────
+101:{lvl:1,diff:'easy',type:'mcq',
+  q:'sum(c(2, 4, 6, 8)) returns:',
+  ch:['A) 14','B) 20','C) 8','D) Error'],ok:1,
+  hint:'sum() adds all values in the vector.',
+  ex:'Correct! ✓\n\nsum() adds every element.\n2+4+6+8 = 20'},
+102:{lvl:1,diff:'easy',type:'mcq',
+  q:'Most concise: create 1,2,3,4,5 in R:',
+  ch:['A) seq(1,5)','B) c(1,2,3,4,5)','C) 1:5','D) int(1,5)'],ok:2,
+  hint:'The colon operator creates integer sequences.',
+  ex:'Correct! ✓\n\n1:5 is the colon operator.\nExpands to c(1L,2L,3L,4L,5L).'},
+103:{lvl:1,diff:'easy',type:'mcq',
+  q:'class(TRUE) returns:',
+  ch:['A) "boolean"','B) "logical"','C) "numeric"','D) "integer"'],ok:1,
+  hint:'TRUE/FALSE have a specific class in R.',
+  ex:'Correct! ✓\n\nTRUE is class "logical".\n"boolean" is JavaScript terminology.'},
+104:{lvl:1,diff:'easy',type:'mcq',
+  q:'nrow(df) returns:',
+  ch:['A) Number of columns','B) Column names','C) Number of rows','D) dim(df)'],ok:2,
+  hint:'nrow = number of rows.',
+  ex:'Correct! ✓\n\nnrow() = number of rows.\nncol() = number of columns.\ndim() = both.'},
+105:{lvl:1,diff:'easy',type:'mcq',
+  q:'length(c(10, 20, 30)) returns:',
+  ch:['A) 10','B) 60','C) 3','D) c(10,20,30)'],ok:2,
+  hint:'length() counts elements.',
+  ex:'Correct! ✓\n\nlength() counts the number of\nelements in a vector or list.'},
+106:{lvl:1,diff:'easy',type:'mcq',
+  q:'c(1, 2) + c(10, 20) returns:',
+  ch:['A) c(1,2,10,20)','B) Error','C) c(11, 22)','D) 33'],ok:2,
+  hint:'R arithmetic is vectorised.',
+  ex:'Correct! ✓\n\nR adds element-by-element:\n1+10=11, 2+20=22 → c(11, 22)'},
+107:{lvl:1,diff:'easy',type:'mcq',
+  q:'max(c(3, 1, 4, 1, 5, 9)) returns:',
+  ch:['A) 3','B) 9','C) 5','D) 1'],ok:1,
+  hint:'max() finds the largest value.',
+  ex:'Correct! ✓\n\nmax() returns the largest element.\nUse which.max() to get the index.'},
+108:{lvl:1,diff:'easy',type:'mcq',
+  q:'sqrt(16) returns:',
+  ch:['A) 4','B) 8','C) 256','D) 2'],ok:0,
+  hint:'sqrt() is the square root function.',
+  ex:'Correct! ✓\n\nsqrt(16) = 4\n√16 = 4'},
+109:{lvl:1,diff:'easy',type:'mcq',
+  q:'abs(-7.5) returns:',
+  ch:['A) -7.5','B) 7','C) 7.5','D) Error'],ok:2,
+  hint:'abs() = absolute value.',
+  ex:'Correct! ✓\n\nabs() removes the sign.\nabs(-7.5) = 7.5'},
+110:{lvl:1,diff:'easy',type:'mcq',
+  q:'What class does 1L have?',
+  ch:['A) "double"','B) "numeric"','C) "integer"','D) "long"'],ok:2,
+  hint:'The L suffix forces integer type.',
+  ex:'Correct! ✓\n\n1L is class "integer".\nWithout L, 1 is class "numeric" (double).'},
+111:{lvl:1,diff:'easy',type:'mcq',
+  q:'rev(c(1, 2, 3)) returns:',
+  ch:['A) c(1,2,3)','B) c(3,2,1)','C) c(-1,-2,-3)','D) Error'],ok:1,
+  hint:'rev() reverses the order.',
+  ex:'Correct! ✓\n\nrev() reverses a vector:\nrev(c(1,2,3)) → c(3,2,1)'},
+112:{lvl:1,diff:'easy',type:'mcq',
+  q:'Which creates a character vector?',
+  ch:['A) c(hello, world)','B) c("hello","world")','C) chr(hello,world)','D) ["hello","world"]'],ok:1,
+  hint:'Strings in R need quotes.',
+  ex:'Correct! ✓\n\nR strings require quotes.\nc("hello","world") creates character vector.'},
+113:{lvl:1,diff:'easy',type:'mcq',
+  q:'round(3.567, digits=1) returns:',
+  ch:['A) 3','B) 3.5','C) 3.6','D) 4'],ok:2,
+  hint:'digits= controls decimal places.',
+  ex:'Correct! ✓\n\nround() to 1 decimal: 3.567 → 3.6\n(rounds the 6, looks at the 7)'},
+114:{lvl:1,diff:'easy',type:'mcq',
+  q:'seq(1, 9, by=2) returns:',
+  ch:['A) c(1,3,5,7,9)','B) c(1,2,4,6,8)','C) c(2,4,6,8)','D) c(1,9)'],ok:0,
+  hint:'by= sets the step size.',
+  ex:'Correct! ✓\n\nseq(1,9,by=2): start at 1,\nstep by 2 → c(1,3,5,7,9)'},
+115:{lvl:1,diff:'easy',type:'mcq',
+  q:'What does c(1,2,3)[2] return?',
+  ch:['A) 1','B) 2','C) 3','D) c(1,2)'],ok:1,
+  hint:'R uses 1-based indexing.',
+  ex:'Correct! ✓\n\nR indexing starts at 1.\nPosition [2] = the second element = 2.'},
+// ── Level 1 Medium ────────────────────────────────────────────────────────────
+121:{lvl:1,diff:'medium',type:'mcq',
+  q:'Select column "height" from df:',
+  ch:['A) df@height','B) df$height','C) df::height','D) df->height'],ok:1,
+  hint:'$ is the list/data frame extraction operator.',
+  ex:'Correct! ✓\n\n$ extracts named elements from\nlists and data frames.'},
+122:{lvl:1,diff:'medium',type:'mcq',
+  q:'df |> group_by(sex) |> summarise(m=mean(age))\nreturns:',
+  ch:['A) Filters rows by sex','B) Mean age per sex group','C) Adds column m','D) Sorts by sex'],ok:1,
+  hint:'group_by splits; summarise collapses each group.',
+  ex:'Correct! ✓\n\ngroup_by(sex) splits into groups.\nsummarise(m=mean(age)) computes mean per group.'},
+123:{lvl:1,diff:'medium',type:'mcq',
+  q:'In ggplot2, which maps variables to visuals?',
+  ch:['A) map()','B) theme()','C) aes()','D) scale()'],ok:2,
+  hint:'aes = aesthetics.',
+  ex:'Correct! ✓\n\naes() maps data columns to visual properties:\nx, y, color, size, shape, fill.'},
+124:{lvl:1,diff:'medium',type:'mcq',
+  q:'Difference: paste() vs paste0()?',
+  ch:['A) Speed','B) paste sep=" ", paste0 sep=""','C) paste0 max 2 args','D) No difference'],ok:1,
+  hint:'What is the default sep= for each?',
+  ex:'Correct! ✓\n\npaste("a","b") → "a b"  (sep=" ")\npaste0("a","b") → "ab"  (sep="")'},
+125:{lvl:1,diff:'medium',type:'mcq',
+  q:'lm(y ~ x, data=df) fits:',
+  ch:['A) Logistic regression','B) Simple linear regression','C) Paired t-test','D) Correlation'],ok:1,
+  hint:'lm = linear model.',
+  ex:'Correct! ✓\n\nlm() fits OLS linear regression.\ny ~ x: y is response, x is predictor.'},
+126:{lvl:1,diff:'medium',type:'mcq',
+  q:'filter(df, score > 80) returns:',
+  ch:['A) Rows where score>80','B) Removes the score column','C) Sorts by score','D) Summary of score'],ok:0,
+  hint:'filter() keeps rows that match the condition.',
+  ex:'Correct! ✓\n\nfilter() subsets rows.\nKeeps only rows where score > 80.'},
+127:{lvl:1,diff:'medium',type:'mcq',
+  q:'head(df, 3) returns:',
+  ch:['A) Column names','B) Last 3 rows','C) First 3 rows','D) Summary of 3 cols'],ok:2,
+  hint:'head() returns the beginning; tail() the end.',
+  ex:'Correct! ✓\n\nhead(df, n) returns the first n rows.\ntail(df, n) returns the last n rows.'},
+128:{lvl:1,diff:'medium',type:'mcq',
+  q:'which(c(FALSE, TRUE, FALSE, TRUE)) returns:',
+  ch:['A) c(T,F,T,F)','B) c(2,4)','C) 2','D) c(1,3)'],ok:1,
+  hint:'which() returns indices of TRUE values.',
+  ex:'Correct! ✓\n\nwhich() returns positions where TRUE.\nPositions 2 and 4 are TRUE → c(2,4).'},
+129:{lvl:1,diff:'medium',type:'mcq',
+  q:'names(df) returns:',
+  ch:['A) Number of columns','B) Column data types','C) Column names','D) Row names'],ok:2,
+  hint:'names() = colnames() for data frames.',
+  ex:'Correct! ✓\n\nnames(df) returns column names\nas a character vector.'},
+130:{lvl:1,diff:'medium',type:'mcq',
+  q:'Native pipe in base R (≥4.1):',
+  ch:['A) %>%','B) ->>','C) |>','D) ::'],ok:2,
+  hint:'Built-in since R 4.1 — no package needed.',
+  ex:'Correct! ✓\n\n|> is the native R pipe (R 4.1+).\n%>% requires the magrittr/tidyverse package.'},
+131:{lvl:1,diff:'medium',type:'mcq',
+  q:'table(c("a","b","a","c","b","b")) returns:',
+  ch:['A) c(2,3,1)','B) Sorted unique values','C) Frequency count per value','D) Error'],ok:2,
+  hint:'table() counts occurrences of each value.',
+  ex:'Correct! ✓\n\ntable() creates a frequency table:\na=2, b=3, c=1'},
+132:{lvl:1,diff:'medium',type:'mcq',
+  q:'What does is.na(NA) return?',
+  ch:['A) NULL','B) NA','C) TRUE','D) FALSE'],ok:2,
+  hint:'is.na tests for missing values.',
+  ex:'Correct! ✓\n\nis.na(NA) → TRUE\nNote: NA == NA gives NA — always use is.na()!'},
+// ── Level 1 Hard ──────────────────────────────────────────────────────────────
+141:{lvl:1,diff:'hard',type:'mcq',
+  q:'lapply() always returns:',
+  ch:['A) A vector','B) A data frame','C) A list','D) A matrix'],ok:2,
+  hint:'"l" in lapply = list.',
+  ex:'Correct! ✓\n\nlapply() always returns a list.\nUse sapply() to get a simplified vector.'},
+142:{lvl:1,diff:'hard',type:'text',
+  q:'Body to return the square of x:\n\nsquare <- function(x) { ___ }',
+  ans:['return(x^2)','x^2','return(x*x)','x*x'],
+  hint:'Last expression is auto-returned.',
+  ex:'Correct! ✓\n\nR auto-returns the last expression.\nreturn() is optional but explicit.'},
+143:{lvl:1,diff:'hard',type:'mcq',
+  q:'Reduce("+", 1:5) returns:',
+  ch:['A) c(1,3,6,10,15)','B) 15','C) 120','D) Error'],ok:1,
+  hint:'Reduce applies the function cumulatively.',
+  ex:'Correct! ✓\n\nReduce applies + left to right:\n((((1+2)+3)+4)+5) = 15'},
+144:{lvl:1,diff:'hard',type:'mcq',
+  q:'cumsum(c(1, 2, 3, 4)) returns:',
+  ch:['A) 10','B) c(1,3,6,10)','C) c(1,2,3,4)','D) c(4,3,2,1)'],ok:1,
+  hint:'cumsum = cumulative running total.',
+  ex:'Correct! ✓\n\nRunning totals:\n1, 1+2=3, 3+3=6, 6+4=10 → c(1,3,6,10)'},
+145:{lvl:1,diff:'hard',type:'mcq',
+  q:'tryCatch({log(-1)}, warning=function(w) "caught")\nreturns:',
+  ch:['A) NaN','B) Inf','C) "caught"','D) An error'],ok:2,
+  hint:'log(-1) raises a warning, not an error.',
+  ex:'Correct! ✓\n\nlog(-1) produces a warning.\ntryCatch catches it → returns "caught".'},
+146:{lvl:1,diff:'hard',type:'text',
+  q:'Argument in mean() to silently ignore NAs:\n\nmean(x, ___)',
+  ans:['na.rm=true','na.rm=t','na.rm'],
+  hint:'NA remove — a logical flag.',
+  ex:'Correct! ✓\n\nna.rm=TRUE tells mean() to skip NAs.\nWithout it: mean(c(1,NA,3)) → NA.'},
+147:{lvl:1,diff:'hard',type:'mcq',
+  q:'which.max(c(3, 1, 4, 1, 5, 9, 2, 6)) returns:',
+  ch:['A) 9','B) 6','C) 8','D) 1'],ok:1,
+  hint:'which.max returns the INDEX, not the value.',
+  ex:'Correct! ✓\n\nwhich.max() returns the index of the max.\nMax value 9 is at position 6.'},
+148:{lvl:1,diff:'hard',type:'mcq',
+  q:'setdiff(c(1,2,3,4), c(2,4)) returns:',
+  ch:['A) c(1,3)','B) c(2,4)','C) c(1,2,3,4)','D) NULL'],ok:0,
+  hint:'setdiff = elements in first NOT in second.',
+  ex:'Correct! ✓\n\nsetdiff(A,B) = A minus B.\nc(1,2,3,4) − c(2,4) = c(1,3)'},
+149:{lvl:1,diff:'hard',type:'mcq',
+  q:'do.call(paste, list("a","b","c")) returns:',
+  ch:['A) Error','B) c("a","b","c")','C) "a b c"','D) list("a","b","c")'],ok:2,
+  hint:'do.call unpacks a list as function arguments.',
+  ex:'Correct! ✓\n\ndo.call(fn, list(args...)) unpacks\nthe list as individual arguments.\nEquivalent to paste("a","b","c").'},
+// ── Level 2 Easy ─────────────────────────────────────────────────────────────
+201:{lvl:2,diff:'easy',type:'mcq',
+  q:'class(1L) returns:',
+  ch:['A) "double"','B) "numeric"','C) "integer"','D) "long"'],ok:2,
+  hint:'L suffix = integer type.',
+  ex:'Correct! ✓\n\n1L is class "integer".\nPlain 1 is class "numeric" (double).'},
+202:{lvl:2,diff:'easy',type:'mcq',
+  q:'is.data.frame(data.frame(x=1)) returns:',
+  ch:['A) "data.frame"','B) FALSE','C) TRUE','D) NULL'],ok:2,
+  hint:'is.*() predicates return TRUE or FALSE.',
+  ex:'Correct! ✓\n\nis.data.frame() → TRUE for data frames.\nNote: typeof(df) returns "list" — not reliable.'},
+203:{lvl:2,diff:'easy',type:'mcq',
+  q:'nchar("statistics") returns:',
+  ch:['A) 9','B) 10','C) 11','D) Error'],ok:1,
+  hint:'nchar() counts characters.',
+  ex:'Correct! ✓\n\nnchar() counts the number of characters.\n"statistics" has 10 letters.'},
+204:{lvl:2,diff:'easy',type:'mcq',
+  q:'unique(c(1, 2, 1, 3, 2)) returns:',
+  ch:['A) c(1,2,3)','B) c(1,2,1,3,2)','C) c(1,1,2,2,3)','D) 3'],ok:0,
+  hint:'unique() removes duplicates.',
+  ex:'Correct! ✓\n\nunique() keeps only first occurrence:\nc(1,2,1,3,2) → c(1,2,3)'},
+205:{lvl:2,diff:'easy',type:'mcq',
+  q:'duplicated(c(1, 2, 1, 3)) returns:',
+  ch:['A) c(F,F,T,F)','B) c(T,T,F,T)','C) c(1,2,1)','D) 1'],ok:0,
+  hint:'duplicated() marks which elements repeat.',
+  ex:'Correct! ✓\n\nduplicated() returns TRUE for\nnon-first repeated elements.\nc(F,F,T,F) — third element is a repeat.'},
+206:{lvl:2,diff:'easy',type:'mcq',
+  q:'as.numeric("3.14") returns:',
+  ch:['A) "3.14"','B) 3.14','C) 3L','D) NA with warning'],ok:1,
+  hint:'as.numeric() coerces to numeric.',
+  ex:'Correct! ✓\n\nas.numeric() converts strings to numbers\nwhen possible. "3.14" → 3.14 (double).'},
+207:{lvl:2,diff:'easy',type:'mcq',
+  q:'toupper("hello world") returns:',
+  ch:['A) "Hello World"','B) "HELLO WORLD"','C) Error','D) "hello world"'],ok:1,
+  hint:'toupper converts to uppercase.',
+  ex:'Correct! ✓\n\ntoupper() converts all characters\nto uppercase. tolower() does the opposite.'},
+208:{lvl:2,diff:'easy',type:'mcq',
+  q:'identical(c(1,2,3), c(1,2,3)) returns:',
+  ch:['A) FALSE','B) NA','C) c(T,T,T)','D) TRUE'],ok:3,
+  hint:'identical() tests exact equality.',
+  ex:'Correct! ✓\n\nidentical() tests exact equality including\ntype. Two identical c(1,2,3) vectors → TRUE.'},
+209:{lvl:2,diff:'easy',type:'mcq',
+  q:'Sys.time() returns class:',
+  ch:['A) "Date"','B) "POSIXct" "POSIXt"','C) "numeric"','D) "character"'],ok:1,
+  hint:'POSIXct stores seconds since 1970.',
+  ex:'Correct! ✓\n\nSys.time() returns POSIXct + POSIXt.\nStores seconds since 1970-01-01 as double.'},
+210:{lvl:2,diff:'easy',type:'mcq',
+  q:'sort(c(3,1,4,1,5)) returns:',
+  ch:['A) c(5,4,3,1,1)','B) c(1,1,3,4,5)','C) c(3,1,4,1,5)','D) c(1,3,4,5)'],ok:1,
+  hint:'sort() sorts in ascending order by default.',
+  ex:'Correct! ✓\n\nsort() returns ascending order by default.\nUse sort(..., decreasing=TRUE) for descending.'},
+211:{lvl:2,diff:'easy',type:'mcq',
+  q:'sum(is.na(c(1, NA, 3, NA))) returns:',
+  ch:['A) 4','B) NA','C) 2','D) 0'],ok:2,
+  hint:'is.na() returns a logical vector; sum() counts TRUEs.',
+  ex:'Correct! ✓\n\nis.na() → c(F,T,F,T)\nsum() counts TRUEs → 2 NAs total.'},
+212:{lvl:2,diff:'easy',type:'mcq',
+  q:'startsWith("rpackage", "r") returns:',
+  ch:['A) FALSE','B) "package"','C) TRUE','D) "r"'],ok:2,
+  hint:'startsWith checks the beginning of a string.',
+  ex:'Correct! ✓\n\nstartsWith("rpackage","r") → TRUE\nNote: case-sensitive. "R" ≠ "r".'},
+// ── Level 2 Medium ────────────────────────────────────────────────────────────
+221:{lvl:2,diff:'medium',type:'mcq',
+  q:'mutate(df, bmi = weight / height^2) does:',
+  ch:['A) Removes bmi column','B) Adds/replaces bmi column','C) Filters by bmi','D) Summarises bmi'],ok:1,
+  hint:'mutate() adds or transforms columns.',
+  ex:'Correct! ✓\n\nmutate() adds a new column (or replaces\nexisting). Original columns are preserved.'},
+222:{lvl:2,diff:'medium',type:'mcq',
+  q:'pivot_longer(df, cols=-id) does:',
+  ch:['A) Removes id column','B) Wide to long format','C) Long to wide format','D) Sorts columns'],ok:1,
+  hint:'Long format: one observation per row.',
+  ex:'Correct! ✓\n\npivot_longer() converts wide → long.\ncols=-id: pivot everything except id column.'},
+223:{lvl:2,diff:'medium',type:'mcq',
+  q:'sapply(1:4, function(x) x^2) returns:',
+  ch:['A) A list of 4','B) c(1,4,9,16)','C) c(1,2,3,4)','D) Error'],ok:1,
+  hint:'sapply simplifies the result.',
+  ex:'Correct! ✓\n\nsapply simplifies to a vector:\n1²=1, 2²=4, 3²=9, 4²=16 → c(1,4,9,16)'},
+224:{lvl:2,diff:'medium',type:'mcq',
+  q:'left_join(a, b, by="id") keeps:',
+  ch:['A) Only matching rows','B) All rows from a, NAs for unmatched b','C) All rows from both','D) Only non-matching rows'],ok:1,
+  hint:'left = keep all from left (a).',
+  ex:'Correct! ✓\n\nleft_join keeps ALL rows from the left table.\nUnmatched right rows become NA.'},
+225:{lvl:2,diff:'medium',type:'mcq',
+  q:'arrange(df, desc(score)) does:',
+  ch:['A) Filters high scores','B) Adds rank column','C) Sorts score descending','D) Removes low scores'],ok:2,
+  hint:'arrange() sorts rows; desc() reverses direction.',
+  ex:'Correct! ✓\n\narrange() sorts by column(s).\ndesc() wraps a column for descending order.'},
+226:{lvl:2,diff:'medium',type:'mcq',
+  q:'select(df, -height) does:',
+  ch:['A) Keeps only height','B) Sorts by height','C) Removes height column','D) Filters by height'],ok:2,
+  hint:'The minus sign removes a column.',
+  ex:'Correct! ✓\n\nIn select(), - removes a column.\nselect(df, -height) drops height, keeps rest.'},
+227:{lvl:2,diff:'medium',type:'mcq',
+  q:'Reduce("+", 1:5, accumulate=TRUE) returns:',
+  ch:['A) 15','B) c(1,3,6,10,15)','C) c(1,2,3,4,5)','D) Error'],ok:1,
+  hint:'accumulate=TRUE keeps running results.',
+  ex:'Correct! ✓\n\naccumulate=TRUE keeps intermediate values:\n1, 1+2=3, 3+3=6, 6+4=10, 10+5=15'},
+228:{lvl:2,diff:'medium',type:'mcq',
+  q:'str_replace("hello world","world","R") returns:',
+  ch:['A) "hello world"','B) "hello R"','C) c("hello","R")','D) Error'],ok:1,
+  hint:'str_replace finds and replaces first match.',
+  ex:'Correct! ✓\n\nstr_replace(string, pattern, replacement)\n"world" → "R": "hello R"'},
+229:{lvl:2,diff:'medium',type:'mcq',
+  q:'map(1:3, ~.x^2) from purrr returns:',
+  ch:['A) c(1,4,9)','B) list(1,4,9)','C) Error','D) 14'],ok:1,
+  hint:'purrr::map() always returns a list.',
+  ex:'Correct! ✓\n\npurrr::map() always returns a list.\nUse map_dbl() to get a numeric vector.'},
+230:{lvl:2,diff:'medium',type:'mcq',
+  q:'What does count(df, group) do in dplyr?',
+  ch:['A) Counts NA in group','B) Sorts by group','C) Counts rows per group','D) Removes groups'],ok:2,
+  hint:'count = group_by + summarise(n=n()).',
+  ex:'Correct! ✓\n\ncount(df, group) is shorthand for:\ngroup_by(group) |> summarise(n=n())'},
+231:{lvl:2,diff:'medium',type:'mcq',
+  q:'tryCatch({log(-1)}, warning=function(w)"caught")\nreturns:',
+  ch:['A) NaN','B) Inf','C) "caught"','D) Error'],ok:2,
+  hint:'log(-1) is a warning, not an error.',
+  ex:'Correct! ✓\n\nlog(-1) raises a warning.\nThe warning handler fires → "caught".'},
+232:{lvl:2,diff:'medium',type:'mcq',
+  q:'which.max(c(3,1,4,1,5,9,2,6)) returns:',
+  ch:['A) 9','B) 6','C) 8','D) 1'],ok:1,
+  hint:'which.max returns the INDEX of the max.',
+  ex:'Correct! ✓\n\nwhich.max() returns the index.\nMax value 9 is at position 6.'},
+// ── Level 2 Hard ─────────────────────────────────────────────────────────────
+241:{lvl:2,diff:'hard',type:'mcq',
+  q:'environment(f) for a function f returns:',
+  ch:['A) Calling environment','B) Enclosing environment\nwhere f was defined','C) Global environment','D) NULL always'],ok:1,
+  hint:'Functions capture their definition environment.',
+  ex:'Correct! ✓\n\nenvironment(f) returns where f was created.\nThis is the basis of closures in R.'},
+242:{lvl:2,diff:'hard',type:'mcq',
+  q:'x<-5; f<-function(){x<<-10}; f(); x returns:',
+  ch:['A) 5','B) NULL','C) 10','D) Error'],ok:2,
+  hint:'<<- assigns to the parent scope.',
+  ex:'Correct! ✓\n\n<<- walks up parent frames and assigns.\nf() sets x=10 in the global environment.'},
+243:{lvl:2,diff:'hard',type:'text',
+  q:'Argument in mean() to silently ignore NAs:\n\nmean(x, ___)',
+  ans:['na.rm=true','na.rm=t','na.rm'],
+  hint:'NA remove — a logical flag.',
+  ex:'Correct! ✓\n\nna.rm=TRUE removes NAs before computing.\nmean(c(1,NA,3)) → NA\nmean(c(1,NA,3), na.rm=TRUE) → 2'},
+244:{lvl:2,diff:'hard',type:'mcq',
+  q:'vapply vs sapply: key difference?',
+  ch:['A) vapply is slower','B) vapply requires specifying return type\n(safer, no surprises)','C) vapply works on lists only','D) No practical difference'],ok:1,
+  hint:'vapply is a type-safe version of sapply.',
+  ex:'Correct! ✓\n\nvapply(x, fn, FUN.VALUE) requires\nyou to specify the expected return type.\nSafer than sapply for production code.'},
+245:{lvl:2,diff:'hard',type:'mcq',
+  q:'A closure in R:',
+  ch:['A) Uses <<-','B) Captures variables from\nenclosing scope','C) Takes another function as arg','D) Returns a list'],ok:1,
+  hint:'Closures "close over" their environment.',
+  ex:'Correct! ✓\n\nA closure = function + enclosing env.\nIt "closes over" free variables\nat the time of definition.'},
+246:{lvl:2,diff:'hard',type:'mcq',
+  q:'match.arg(method, c("exact","partial","none")) does:',
+  ch:['A) Returns the string "method"','B) Validates and completes partial argument matches','C) Raises an error always','D) Converts to integer'],ok:1,
+  hint:'match.arg is for argument validation.',
+  ex:'Correct! ✓\n\nmatch.arg() validates function arguments\nagainst a set of choices and supports\npartial matching. Very common in R packages.'},
+247:{lvl:2,diff:'hard',type:'mcq',
+  q:'cumsum(c(1,2,3,4)) returns:',
+  ch:['A) 10','B) c(1,3,6,10)','C) c(1,2,3,4)','D) c(4,3,2,1)'],ok:1,
+  hint:'cumsum = cumulative running total.',
+  ex:'Correct! ✓\n\ncumsum() returns a running total.\n1, 1+2=3, 3+3=6, 6+4=10 → c(1,3,6,10)'},
+248:{lvl:2,diff:'hard',type:'mcq',
+  q:'Reduce("+", 1:5) returns:',
+  ch:['A) c(1,3,6,10,15)','B) 15','C) 120','D) Error'],ok:1,
+  hint:'Reduce applies the function cumulatively.',
+  ex:'Correct! ✓\n\nReduce applies + left to right:\n((((1+2)+3)+4)+5) = 15'},
+249:{lvl:2,diff:'hard',type:'mcq',
+  q:'do.call(rbind, list(c(1,2), c(3,4))) returns:',
+  ch:['A) c(1,2,3,4)','B) A 2×2 matrix','C) A list of 4','D) Error'],ok:1,
+  hint:'do.call unpacks a list as separate arguments.',
+  ex:'Correct! ✓\n\ndo.call(rbind, list(c(1,2),c(3,4)))\n= rbind(c(1,2),c(3,4))\n= 2×2 matrix'},
+// ── Level 3 Easy ─────────────────────────────────────────────────────────────
+301:{lvl:3,diff:'easy',type:'mcq',
+  q:'which(c(F,T,F,T,T)) returns:',
+  ch:['A) c(1,3,5)','B) c(2,4,5)','C) c(T,F,T,F,F)','D) TRUE'],ok:1,
+  hint:'which() returns indices of TRUE values.',
+  ex:'Correct! ✓\n\nwhich() returns positions of TRUE values.\nPositions 2, 4, 5 are TRUE.'},
+302:{lvl:3,diff:'easy',type:'mcq',
+  q:'setdiff(c(1,2,3,4), c(2,4)) returns:',
+  ch:['A) c(1,3)','B) c(2,4)','C) c(1,2,3,4)','D) NULL'],ok:0,
+  hint:'setdiff = elements in A NOT in B.',
+  ex:'Correct! ✓\n\nsetdiff(A,B) = A minus B.\nc(1,2,3,4) − c(2,4) = c(1,3)'},
+303:{lvl:3,diff:'easy',type:'mcq',
+  q:'vapply(1:3, function(x) x*2, numeric(1)) returns:',
+  ch:['A) A list','B) c(2,4,6)','C) Error','D) c(1,2,3)'],ok:1,
+  hint:'vapply with numeric(1) returns a numeric vector.',
+  ex:'Correct! ✓\n\nvapply with FUN.VALUE=numeric(1)\nreturns a numeric vector: c(2,4,6).'},
+304:{lvl:3,diff:'easy',type:'mcq',
+  q:'format(1234567, big.mark=",") returns:',
+  ch:['A) "1234567"','B) "1,234,567"','C) 1234567','D) Error'],ok:1,
+  hint:'big.mark adds thousands separators.',
+  ex:'Correct! ✓\n\nformat() with big.mark="," adds\nthousands separators: "1,234,567"'},
+305:{lvl:3,diff:'easy',type:'mcq',
+  q:'Sys.getenv("HOME") returns:',
+  ch:['A) NULL','B) TRUE','C) A character path string','D) Error'],ok:2,
+  hint:'Sys.getenv reads environment variables.',
+  ex:'Correct! ✓\n\nSys.getenv() returns environment variable\nvalues as character strings.\nHOME = your home directory path.'},
+306:{lvl:3,diff:'easy',type:'mcq',
+  q:'class(data.frame(a=1:3)$a) returns:',
+  ch:['A) "data.frame"','B) "numeric"','C) "integer"','D) "factor"'],ok:2,
+  hint:'1:3 creates integer sequences.',
+  ex:'Correct! ✓\n\n1:3 creates an integer sequence.\nclass(1:3) → "integer"\n(c(1,2,3) would be "numeric")'},
+307:{lvl:3,diff:'easy',type:'mcq',
+  q:'is.data.frame(tibble(x=1)) returns:',
+  ch:['A) FALSE','B) TRUE','C) "tbl_df"','D) Error'],ok:1,
+  hint:'Tibbles inherit from data.frame.',
+  ex:'Correct! ✓\n\nTibbles ARE data frames — they inherit\nfrom data.frame, so is.data.frame() → TRUE.\nBut class(tbl) shows "tbl_df" "tbl" "data.frame".'},
+308:{lvl:3,diff:'easy',type:'mcq',
+  q:'typeof(function(x) x) returns:',
+  ch:['A) "function"','B) "closure"','C) "environment"','D) "list"'],ok:1,
+  hint:'Functions are stored as closures internally.',
+  ex:'Correct! ✓\n\ntypeof(fn) → "closure"\nclass(fn) → "function"\nMost user-defined functions are closures.'},
+// ── Level 3 Medium ────────────────────────────────────────────────────────────
+321:{lvl:3,diff:'medium',type:'mcq',
+  q:'environment(f) returns:',
+  ch:['A) Calling environment','B) Enclosing environment\nwhere f was defined','C) Global environment','D) NULL always'],ok:1,
+  hint:'Functions capture their definition env.',
+  ex:'Correct! ✓\n\nenvironment(f) = the env where\nf was created. Foundation of closures.'},
+322:{lvl:3,diff:'medium',type:'mcq',
+  q:'UseMethod("foo") inside foo() does:',
+  ch:['A) Recursive call','B) Dispatches foo.class(x)\nbased on first arg','C) Registers generic','D) Exports function'],ok:1,
+  hint:'S3 dispatch mechanism.',
+  ex:'Correct! ✓\n\nUseMethod() implements S3 dispatch.\nCalls foo.ClassName() based on class\nof the first argument.'},
+323:{lvl:3,diff:'medium',type:'mcq',
+  q:'rlang::enquo(x) inside a function:',
+  ch:['A) Evaluates x immediately','B) Captures x as quosure\n(quoted expr + env)','C) Converts x to string','D) Returns class of x'],ok:1,
+  hint:'enquo = quote without evaluating.',
+  ex:'Correct! ✓\n\nenquo() captures an expression + its\nenvironment as a quosure. Foundation\nof tidy evaluation in dplyr/ggplot2.'},
+324:{lvl:3,diff:'medium',type:'mcq',
+  q:'tidymodels: v-fold CV function:',
+  ch:['A) initial_split()','B) vfold_cv()','C) bootstraps()','D) validation_split()'],ok:1,
+  hint:'"vfold" is in the function name.',
+  ex:'Correct! ✓\n\nvfold_cv() creates v-fold cross-validation\nsplits. initial_split() is just train/test.'},
+325:{lvl:3,diff:'medium',type:'mcq',
+  q:'Rcpp::sourceCpp("file.cpp") does:',
+  ch:['A) Runs Python','B) Compiles C++ and loads\nfunctions into R','C) Profiles code','D) Connects to SQL'],ok:1,
+  hint:'Rcpp = R + C++ bridge.',
+  ex:'Correct! ✓\n\nsourceCpp() compiles the C++ file\nand loads the resulting functions.\nRcpp is the standard R–C++ bridge.'},
+326:{lvl:3,diff:'medium',type:'mcq',
+  q:'deparse(substitute(x)) inside a function returns:',
+  ch:['A) Value of x as string','B) Argument name/expression\nas character string','C) Environment of x','D) Type of x'],ok:1,
+  hint:'substitute captures the call; deparse → string.',
+  ex:'Correct! ✓\n\nsubstitute(x) captures the expression.\ndeparse() converts it to a string.\nUsed for NSE and custom error messages.'},
+327:{lvl:3,diff:'medium',type:'mcq',
+  q:'R package for line-by-line profiling:\n___(expr)',
+  ans:['profvis','profvis(expr)','profvis(','profvis()'],
+  type:'text',
+  hint:'profvis package creates flame graphs.',
+  ex:'Correct! ✓\n\nprofvis({...}) creates an interactive\nflame graph showing line-by-line\nexecution time and memory usage.'},
+328:{lvl:3,diff:'medium',type:'mcq',
+  q:'purrr::map2(c(1,2,3), c(10,20,30), `+`) returns:',
+  ch:['A) c(11,22,33)','B) list(11,22,33)','C) Error','D) 66'],ok:1,
+  hint:'map2 iterates over two lists in parallel.',
+  ex:'Correct! ✓\n\nmap2() applies fn to pairs from two lists.\n1+10=11, 2+20=22, 3+30=33\nmap2 returns a list, map2_dbl a vector.'},
+329:{lvl:3,diff:'medium',type:'mcq',
+  q:'bench::mark(mean(1:1e6)) vs system.time(): key advantage?',
+  ch:['A) bench is faster to run','B) bench provides more iterations,\nstatistics, and GC info','C) system.time handles NAs','D) No real difference'],ok:1,
+  hint:'bench::mark runs many iterations and reports statistics.',
+  ex:'Correct! ✓\n\nbench::mark() runs many iterations,\nreports median, memory, GC info.\nsystem.time() is a single measurement.'},
+330:{lvl:3,diff:'medium',type:'mcq',
+  q:'lmer(y ~ x + (1|group), data=df) fits:',
+  ch:['A) Fixed-effects-only model','B) Random intercepts\nlinear mixed model','C) Random slopes model','D) Bayesian model'],ok:1,
+  hint:'(1|group) = random intercept per group.',
+  ex:'Correct! ✓\n\n(1|group) specifies a random intercept.\nThe model has both fixed (x) and\nrandom effects (group-level intercept).'},
+// ── Level 3 Hard ─────────────────────────────────────────────────────────────
+341:{lvl:3,diff:'hard',type:'mcq',
+  q:'t.test(x, y, var.equal=FALSE): var.equal=FALSE means:',
+  ch:['A) Pool the variances','B) Welch correction:\nno equal variance assumption','C) Paired samples','D) One-sample test'],ok:1,
+  hint:'Welch = unequal variance assumption.',
+  ex:'Correct! ✓\n\nvar.equal=FALSE → Welch t-test.\nDoes NOT pool variances.\nMore robust when σ₁ ≠ σ₂.'},
+342:{lvl:3,diff:'hard',type:'mcq',
+  q:'on.exit(expr) in a function:',
+  ch:['A) Runs expr immediately','B) Runs expr when function exits\n(normal or error)','C) Exits and returns expr','D) Prevents function from running'],ok:1,
+  hint:'on.exit = cleanup handler.',
+  ex:'Correct! ✓\n\non.exit() registers cleanup code\nthat runs when the function exits —\nwhether normally or due to an error.'},
+343:{lvl:3,diff:'hard',type:'mcq',
+  q:'withCallingHandlers vs tryCatch: key difference?',
+  ch:['A) No difference','B) withCallingHandlers resumes execution\nafter handling; tryCatch exits','C) tryCatch handles warnings;\nwithCallingHandlers handles errors','D) withCallingHandlers is deprecated'],ok:1,
+  hint:'One resumes, one exits.',
+  ex:'Correct! ✓\n\nwithCallingHandlers: handles condition\nand RESUMES execution.\ntryCatch: handles condition and EXITS\nthe protected expression.'},
+344:{lvl:3,diff:'hard',type:'mcq',
+  q:'substitute(x + y) returns:',
+  ch:['A) The value of x + y','B) The unevaluated expression x+y\nas a language object','C) "x + y" as character','D) Error if x undefined'],ok:1,
+  hint:'substitute captures the call without evaluating.',
+  ex:'Correct! ✓\n\nsubstitute() captures the expression\nwithout evaluating it.\nResult is a "call" object (language type).'},
+345:{lvl:3,diff:'hard',type:'mcq',
+  q:'R6Class vs S3: key advantage of R6?',
+  ch:['A) R6 is faster','B) R6 has encapsulated mutable state\nand true reference semantics','C) R6 needs no packages','D) R6 has better dispatch'],ok:1,
+  hint:'R6 = reference semantics; S3 = copy semantics.',
+  ex:'Correct! ✓\n\nR6 uses reference semantics —\nmodifying an object modifies ALL\nreferences to it. S3 copies on modify.'},
+346:{lvl:3,diff:'hard',type:'mcq',
+  q:'missing(x) inside a function returns:',
+  ch:['A) TRUE if x is NA','B) TRUE if x was not supplied\nby the caller','C) FALSE always','D) The default value of x'],ok:1,
+  hint:'missing() detects if an argument was passed.',
+  ex:'Correct! ✓\n\nmissing(x) → TRUE if the caller did\nnot supply that argument.\nUsed to distinguish NULL from "not provided".'},
+347:{lvl:3,diff:'hard',type:'mcq',
+  q:'rlang::eval_tidy(expr, data) differs from eval() because:',
+  ch:['A) It is faster','B) It evaluates in a data mask,\nso column names are found in data','C) It uses global env only','D) It never throws errors'],ok:1,
+  hint:'eval_tidy supports the data mask.',
+  ex:'Correct! ✓\n\neval_tidy() creates a data mask so\ncoding like rlang::eval_tidy(quote(x),\ndf) finds "x" in df first.'},
+348:{lvl:3,diff:'hard',type:'mcq',
+  q:'Rcpp::NumericVector x(10) creates:',
+  ch:['A) An R list of 10','B) A C++ double vector\nof length 10, zero-initialised','C) A character vector','D) An integer vector of 10'],ok:1,
+  hint:'NumericVector ≈ double[] in C++.',
+  ex:'Correct! ✓\n\nNumericVector is the Rcpp wrapper\nfor R numeric (double) vectors.\nNumericVector x(10) = length-10 double vector.'},
+349:{lvl:3,diff:'hard',type:'mcq',
+  q:'sys.call() vs match.call() inside a function:',
+  ch:['A) Both return the same thing','B) sys.call: exactly as written;\nmatch.call: with matched argument names','C) sys.call uses partial matching','D) match.call evaluates arguments'],ok:1,
+  hint:'match.call normalises argument names.',
+  ex:'Correct! ✓\n\nsys.call() returns the literal call.\nmatch.call() returns the call with\nall arguments fully named (normalised).'},
+350:{lvl:3,diff:'hard',type:'mcq',
+  q:'What does Recall() do inside a recursive function?',
+  ch:['A) Restarts the R session','B) Calls the current function\nagain (even if renamed)','C) Clears the call stack','D) Returns to the top level'],ok:1,
+  hint:'Recall() is a safe recursive call mechanism.',
+  ex:'Correct! ✓\n\nRecall() calls the enclosing function\nagain, even if it was renamed.\nSafer than using the function name directly.'},
 };
-const QS2={
-  1:{badge:'WP·EASY',type:'mcq',q:'class(TRUE) returns:',ch:['A) "boolean"','B) "numeric"','C) "logical"','D) "integer"'],ok:2,hint:'TRUE/FALSE type.',ex:'Correct! ✓\n\nTRUE / FALSE are class "logical" in R.\nNote: "boolean" is JavaScript terminology, not R.'},
-  2:{badge:'WP·EASY',type:'mcq',q:'length(list(1,"a",c(1,2,3)))\nreturns:',ch:['A) 5','B) 3','C) 6','D) Error'],ok:1,hint:'Top-level elements.',ex:'Correct! ✓\n\nlength() counts top-level elements in a list.\nThe nested c(1,2,3) counts as ONE element.'},
-  4:{badge:'WP·MED',type:'mcq',q:'dplyr: adds/modifies columns:',ch:['A) select()','B) filter()','C) mutate()','D) rename()'],ok:2,hint:'Create or transform.',ex:'Correct! ✓\n\nmutate() adds or transforms columns.\nThe original columns remain — nothing is deleted.'},
-  5:{badge:'WP·EASY',type:'mcq',q:'is.na(NA) returns:',ch:['A) NULL','B) NA','C) TRUE','D) FALSE'],ok:2,hint:'is.na tests for missing.',ex:'Correct! ✓\n\nis.na(NA) → TRUE.\nImportant: NA == NA gives NA, not TRUE — always use is.na().'},
-  6:{badge:'WP·MED',type:'mcq',q:'sapply(1:4, function(x) x^2)\nreturns:',ch:['A) A list','B) c(1,4,9,16)','C) c(1,2,3,4)','D) Error'],ok:1,hint:'sapply simplifies.',ex:'Correct! ✓\n\nsapply() applies a function and simplifies output.\n1²=1, 2²=4, 3²=9, 4²=16 → c(1, 4, 9, 16)'},
-  7:{badge:'WP·MED',type:'mcq',q:'pivot_longer(df,cols=-id)\ndoes what?',ch:['A) Removes id','B) Wide to long','C) Rows to cols','D) Sorts cols'],ok:1,hint:'Long=one obs per row.',ex:'Correct! ✓\n\npivot_longer() converts wide to long format.\nEach non-id column becomes its own row.'},
-  9:{badge:'WP·HARD',type:'mcq',q:'tryCatch({log(-1)},\nwarning=function(w)"caught")\nreturns:',ch:['A) NaN','B) Inf','C) "caught"','D) Error'],ok:2,hint:'log(-1)=warning.',ex:'Correct! ✓\n\nlog(-1) raises a warning (not an error).\ntryCatch catches it and returns the handler value.'},
-  10:{badge:'WP·HARD',type:'text',q:'mean() to ignore NAs:\nmean(x, ___)',ans:['na.rm=true','na.rm=t','na.rm'],hint:'NA remove flag.',ex:'Correct! ✓\n\nna.rm=TRUE tells mean() to silently skip NAs.\nWithout it, mean(c(1, NA, 3)) returns NA.'},
-  11:{badge:'WP·MED',type:'mcq',q:'which.max(c(3,1,4,1,5,9,2,6))\nreturns:',ch:['A) 9','B) 6','C) 8','D) 1'],ok:1,hint:'Returns INDEX not value.',ex:'Correct! ✓\n\nwhich.max() returns the INDEX of the max value.\nThe value 9 is at position 6 in the vector.'},
-  12:{badge:'WP·HARD',type:'mcq',q:'Reduce("+",1:5) returns:',ch:['A) c(1,3,6,10,15)','B) 15','C) 120','D) Error'],ok:1,hint:'Cumulative reduction.',ex:'Correct! ✓\n\nReduce applies + cumulatively: ((((1+2)+3)+4)+5).\nThe accumulate=TRUE variant returns all intermediate sums.'},
-  13:{badge:'WP·HARD',type:'mcq',q:'cumsum(c(1,2,3,4)) returns:',ch:['A) 10','B) c(1,3,6,10)','C) c(1,2,3,4)','D) c(4,3,2,1)'],ok:1,hint:'Running total.',ex:'Correct! ✓\n\ncumsum() returns a running total vector.\n1, 1+2=3, 3+3=6, 6+4=10 → c(1, 3, 6, 10)'},
-};
-const QS3={
-  1:{badge:'WP·EASY',type:'mcq',q:'Sys.time() class:',ch:['A) "Date"','B) "POSIXct"/"POSIXt"','C) "numeric"','D) "difftime"'],ok:1,hint:'POSIXct=calendar time.',ex:'Correct! ✓\n\nSys.time() returns class POSIXct and POSIXt.\nPOSIXct stores seconds since 1970-01-01 as a double.'},
-  2:{badge:'WP·EASY',type:'mcq',q:'Checks if x is a data frame:',ch:['A) class(x)=="df"','B) is.data.frame(x)','C) typeof(x)=="list"','D) inherits(x,"frame")'],ok:1,hint:'Dedicated is.*() fn.',ex:'Correct! ✓\n\nis.data.frame() is the correct predicate.\ntypeof(df) returns "list" which is not a reliable check.'},
-  4:{badge:'WP·MED',type:'mcq',q:'which(c(F,T,F,T,T)) returns:',ch:['A) c(1,3,5)','B) c(2,4,5)','C) logical vec','D) TRUE'],ok:1,hint:'which()=indices of TRUEs.',ex:'Correct! ✓\n\nwhich() returns indices where the condition is TRUE.\nc(F,T,F,T,T) → positions 2, 4, and 5.'},
-  5:{badge:'WP·EASY',type:'mcq',q:'setdiff(c(1,2,3,4),c(2,4)) returns:',ch:['A) c(1,3)','B) c(2,4)','C) c(1,2,3,4)','D) NULL'],ok:0,hint:'Elements in 1st NOT in 2nd.',ex:'Correct! ✓\n\nsetdiff(A, B) = elements in A but NOT in B.\nc(1,2,3,4) minus c(2,4) = c(1, 3)'},
-  6:{badge:'WP·MED',type:'mcq',q:'environment(f) returns:',ch:['A) Calling env','B) Enclosing env\nwhere f was defined','C) Global env','D) NULL'],ok:1,hint:'Functions capture def env.',ex:'Correct! ✓\n\nenvironment(f) = the env where f was defined.\nThis is the basis of closures in R.'},
-  7:{badge:'WP·MED',type:'mcq',q:'Reduce("+",1:5,accumulate=TRUE)\nreturns:',ch:['A) 15','B) c(1,3,6,10,15)','C) c(1,2,3,4,5)','D) Error'],ok:1,hint:'accumulate=TRUE=running.',ex:'Correct! ✓\n\naccumulate=TRUE keeps all intermediate results.\n1, 3, 6, 10, 15 are the running sums.'},
-  9:{badge:'WP·HARD',type:'mcq',q:'A closure in R:',ch:['A) Uses <<-','B) Captures vars\nfrom enclosing scope','C) Takes fn arg','D) Returns list'],ok:1,hint:'Closures close over env.',ex:'Correct! ✓\n\nA closure = function + its enclosing environment.\nIt "closes over" free variables at definition time.'},
-  10:{badge:'WP·HARD',type:'text',q:'R package for line-by-line profiling:\n___(expr)',ans:['profvis','profvis(expr)','profvis(','profvis()'],hint:'profvis package.',ex:'Correct! ✓\n\nprofvis() creates an interactive flame graph.\nIt profiles code line-by-line for time and memory.'},
-  11:{badge:'WP·MED',type:'mcq',q:'x<-5;f<-function(){x<<-10};f();x\nreturns:',ch:['A) 5','B) NULL','C) 10','D) Error'],ok:2,hint:'<<-=parent scope.',ex:'Correct! ✓\n\n<<- walks up parent frames and assigns there.\nf() sets x = 10 in the global environment.'},
-  12:{badge:'WP·HARD',type:'mcq',q:'UseMethod("foo") inside foo():',ch:['A) Recursive call','B) Dispatches foo.class(x)\nbased on 1st arg','C) Registers generic','D) Exports fn'],ok:1,hint:'S3 dispatch.',ex:'Correct! ✓\n\nUseMethod() triggers S3 dispatch.\nIt calls foo.ClassName() based on class(first_arg).'},
-  13:{badge:'WP·HARD',type:'mcq',q:'Rcpp::sourceCpp("file.cpp"):',ch:['A) Runs Python','B) Compiles C++→loads\nfns into R','C) Profiles','D) SQL'],ok:1,hint:'Rcpp=R+C++ bridge.',ex:'Correct! ✓\n\nsourceCpp() compiles the .cpp file and loads functions.\nRcpp is the standard bridge for performance-critical R code.'},
-};
-function getQ(qid){return(lvl===1?QS1:lvl===2?QS2:QS3)[qid];}
+
+// ── Per-level, per-difficulty pools (auto-built from QB) ─────────────────────
+const QB_POOL={};
+Object.keys(QB).map(Number).forEach(id=>{
+  const q=QB[id];
+  const key=q.lvl+'-'+q.diff;
+  if(!QB_POOL[key])QB_POOL[key]=[];
+  QB_POOL[key].push(id);
+});
+function getPool(lv,diff){return QB_POOL[lv+'-'+diff]||[];}
+
+// ── Per-run used-question tracking ──────────────────────────────────────────
+let usedQids=new Set();
+function pickQid(lv,diff){
+  const pool=getPool(lv,diff);
+  const avail=pool.filter(id=>!usedQids.has(id));
+  const src=avail.length>0?avail:pool; // fallback if pool exhausted
+  const id=src[Math.floor(Math.random()*src.length)];
+  usedQids.add(id);return id;
+}
+function getQ(qid){return QB[qid];}
+
+
 const BOSS_QS={
   1:[
     {badge:'SOUR RON·1',type:'mcq',q:'🍋 SOUR RON ATTACKS!\n\ndf|>filter(score>80)|>\n  select(name,score)|>\n  arrange(desc(score))\nWhat does this do?',ch:['A) All rows,sorted','B) Rows score>80,\n     cols name+score,\n     sorted desc','C) Summary scores>80','D) Removes name+score'],ok:1,hint:'Read each pipe step.',ex:'Correct! ✓\nfilter→select→arrange(desc)'},
@@ -473,7 +1022,7 @@ const SNAIL_DATA={
 function shuffleQ(q){if(q.type!=='mcq')return{...q};const ord=q.ch.map((_,i)=>i);for(let i=ord.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[ord[i],ord[j]]=[ord[j],ord[i]];}return{...q,ch:ord.map(i=>q.ch[i]),ok:ord.indexOf(q.ok)};}
 
 // ══ Map Generation ══
-const Q_POOLS={easy:[1,2,5],medium:[4,6,7,11],hard:[9,10,12,13]};
+// Q_POOLS replaced by QB_POOL (auto-built from QB)
 const EVENT_IDS=['altar','fairy','chest','campfire','scholar','anvil','flower'];
 function generateMap(){
   const rows=[];let nid=0;
@@ -488,12 +1037,12 @@ function generateMap(){
       if(r===0){type='start';}else if(r===10){type='boss';}
       else if(r===1){
         // Row 1: always easy battles — gentle start
-        type='easy';qid=Q_POOLS.easy[Math.floor(Math.random()*Q_POOLS.easy.length)];
+        type='easy';qid=pickQid(lvl,'easy');
       } else {
         const roll=Math.random();
         if(roll<.20){type='event';eventType=EVENT_IDS[Math.floor(Math.random()*EVENT_IDS.length)];}
         else if(roll<.33){type='shop';}else if(roll<.43){type='tavern';}
-        else{const dr=Math.random(),ew=Math.max(0,0.65-(r-1)*0.075),mw=Math.min(0.38,0.25+(r-1)*0.018);type=dr<ew?'easy':dr<ew+mw?'medium':'hard';qid=Q_POOLS[type][Math.floor(Math.random()*Q_POOLS[type].length)];}
+        else{const dr=Math.random(),ew=Math.max(0,0.65-(r-1)*0.075),mw=Math.min(0.38,0.25+(r-1)*0.018);type=dr<ew?'easy':dr<ew+mw?'medium':'hard';qid=pickQid(lvl,type);}
       }
       rn.push({id:nid++,type,row:r,col:c,colTotal:cnt,fx,fy,next:[],qid,eventType});
     }
@@ -626,14 +1175,17 @@ function drawNodes(){
       ctx.shadowBlur=av||cur?10:0;ctx.shadowColor=col.glow;hexP(x,y,R);const qg=ctx.createRadialGradient(x,y-R*.2,0,x,y,R);qg.addColorStop(0,dn&&!cur?'#1a1028':'#2a1248');qg.addColorStop(1,dn&&!cur?'#100a20':'#180830');ctx.fillStyle=qg;ctx.fill();ctx.strokeStyle=dn&&!cur?'rgba(80,50,130,.35)':cur?'#fff':av?col.stroke:'rgba(60,40,100,.4)';ctx.lineWidth=cur?2.5:1.5;ctx.stroke();ctx.shadowBlur=0;
       const qs=1+Math.sin(tick*.08+n.id)*.06;ctx.save();ctx.translate(x,y);ctx.scale(qs,qs);ctx.fillStyle=dn&&!cur?'rgba(120,80,180,.4)':'rgba(210,160,255,.95)';ctx.font=`bold ${Math.max(12,R*.62)}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('?',0,0);ctx.restore();
     } else if(n.type==='shop'){
-      const h=SH/2;if(av&&!dn&&Math.floor(tick/22)%2===0){ctx.shadowBlur=14+pulse*12;ctx.shadowColor=col.glow;ctx.beginPath();ctx.moveTo(x,y-h-7);ctx.lineTo(x+h*.6+5,y);ctx.lineTo(x,y+h+7);ctx.lineTo(x-h*.6-5,y);ctx.closePath();ctx.strokeStyle=`rgba(160,100,230,${.18+pulse*.35})`;ctx.lineWidth=1.5;ctx.stroke();ctx.shadowBlur=0;}
-      ctx.shadowBlur=av||cur?10:0;ctx.shadowColor=col.glow;ctx.beginPath();ctx.moveTo(x,y-h);ctx.lineTo(x+h*.6,y);ctx.lineTo(x,y+h);ctx.lineTo(x-h*.6,y);ctx.closePath();const dg=ctx.createLinearGradient(x,y-h,x,y+h);dg.addColorStop(0,dn&&!cur?'#100820':'#251240');dg.addColorStop(1,dn&&!cur?'#0a0614':'#150a28');ctx.fillStyle=dg;ctx.fill();ctx.strokeStyle=dn&&!cur?'rgba(80,50,120,.35)':cur?'#fff':av?col.stroke:'rgba(60,40,90,.4)';ctx.lineWidth=cur?2.5:1.5;ctx.stroke();ctx.shadowBlur=0;// Shop diamond: cart icon + SHOP text
-ctx.font=`${Math.max(13,R*.56)}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';
-ctx.fillStyle=dn&&!cur?'rgba(120,80,180,.35)':'rgba(210,170,255,.9)';
-ctx.fillText('🛒',x,y-R*.18);
-ctx.font=`bold ${Math.max(8,R*.3)}px monospace`;
-ctx.fillStyle=dn&&!cur?'#554470':'#d8b8ff';
-ctx.fillText('SHOP',x,y+R*.62);
+      // Shop: hexagon like all other nodes
+      if(av&&!dn){ctx.shadowBlur=8+pulse*14;ctx.shadowColor=col.glow;hexP(x,y,R+8+pulse*4);ctx.strokeStyle=`rgba(160,100,230,${.2+pulse*.4})`;ctx.lineWidth=1.5;ctx.stroke();ctx.shadowBlur=0;}
+      ctx.shadowBlur=av||cur?10:0;ctx.shadowColor=col.glow;hexP(x,y,R);
+      const sg=ctx.createRadialGradient(x,y-R*.25,0,x,y,R);sg.addColorStop(0,dn&&!cur?'#1a0c30':'#2a1050');sg.addColorStop(1,dn&&!cur?'#100818':'#18082a');ctx.fillStyle=sg;ctx.fill();
+      ctx.strokeStyle=dn&&!cur?'rgba(80,50,120,.35)':cur?'#fff':av?col.stroke:'rgba(60,40,90,.4)';ctx.lineWidth=cur?2.5:1.5;ctx.stroke();ctx.shadowBlur=0;
+      ctx.font=`${Math.max(13,R*.52)}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillStyle=dn&&!cur?'rgba(120,80,180,.35)':'rgba(210,170,255,.9)';
+      ctx.fillText('🛒',x,y-R*.18);
+      ctx.font=`bold ${Math.max(8,R*.3)}px monospace`;
+      ctx.fillStyle=dn&&!cur?'#554470':'#d8b8ff';
+      ctx.fillText('SHOP',x,y+R*.62);
     } else if(n.type==='tavern'){
       if(av&&!dn){ctx.shadowBlur=8+pulse*14;ctx.shadowColor=col.glow;hexP(x,y,R+8+pulse*4);ctx.strokeStyle=`rgba(192,120,32,${.2+pulse*.4})`;ctx.lineWidth=1.5;ctx.stroke();ctx.shadowBlur=0;}
       ctx.shadowBlur=av||cur?8:0;ctx.shadowColor=col.glow;hexP(x,y,R);const tg=ctx.createRadialGradient(x,y-R*.25,0,x,y,R);tg.addColorStop(0,'#401e08');tg.addColorStop(1,'#250e04');ctx.fillStyle=dn&&!cur?'#1a1006':tg;ctx.fill();ctx.strokeStyle=dn&&!cur?'rgba(100,70,20,.35)':cur?'#fff':av?col.stroke:'rgba(70,50,10,.4)';ctx.lineWidth=cur?2.5:1.5;ctx.stroke();ctx.shadowBlur=0;ctx.fillStyle=dn&&!cur?'rgba(140,90,30,.5)':'rgba(230,180,60,.95)';ctx.font=`${Math.max(10,R*.5)}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🍺',x,y-1);ctx.font=`${Math.max(7,R*.27)}px monospace`;ctx.fillStyle=dn&&!cur?'rgba(100,70,20,.5)':'rgba(200,150,50,.8)';ctx.fillText('TAVERN',x,y+R*.72);
@@ -667,7 +1219,13 @@ if(n.type==='easy'||n.type==='medium'||n.type==='hard'){
     ctx.globalAlpha=1;
   }
 }
-function render(){if(gstate==='start')return;drawBg();drawPaths();drawNodes();}
+function render(){
+  if(gstate==='start')return;
+  drawBg();drawPaths();drawNodes();
+  // show legend only on map screen
+  const lg=document.getElementById('map-legend');
+  if(lg)lg.style.display=(gstate==='map')?'block':'none';
+}
 
 // ══ Click ══
 function pathHit(n,mx,my){const R=nodeR(),BR=bossR(),x=nx(n),y=ny(n);if(n.type==='boss')return Math.hypot(mx-x,my-y)<=BR+12;return Math.hypot(mx-x,my-y)<=R+10;}
@@ -734,7 +1292,7 @@ function openEvent(n){
   setBadge('? '+def.title,'#8860d8');$$('ov-q').textContent='';
   $$('ev-title').textContent=def.title;$$('ev-flavor').textContent=def.flavor;
   const ch=$$('ev-choices');ch.innerHTML='';
-  def.choices.forEach(c=>{const btn=document.createElement('button');btn.className='ev-choice-btn';btn.innerHTML='<strong>'+c.icon+' '+c.label+'</strong><span class="ev-choice-desc"> — '+c.desc+'</span>';btn.onclick=c.fn;ch.appendChild(btn);});
+  def.choices.forEach(c=>{const btn=document.createElement('button');btn.className='ev-choice-btn';btn.innerHTML='<strong>'+c.icon+' '+c.label+'</strong><span class="ev-choice-desc"> — '+c.desc+'</span>';btn.onclick=()=>{ch.querySelectorAll('.ev-choice-btn').forEach(b=>{b.disabled=true;b.onclick=null;b.style.opacity='.5';});c.fn();};ch.appendChild(btn);});
   $$('ov-event').style.display='block';gstate='event';
 }
 // ── Flower event ──────────────────────────────────────────────────────────
@@ -886,19 +1444,91 @@ function advance(){
 // ══ Relics ══
 function getRelicChoices(){const pool=relicPool.filter(id=>!activeRelics.has(id)&&(id!=='sprite'||Math.random()<.33));const fallback=relicPool.filter(id=>!activeRelics.has(id)&&id!=='sprite');return(pool.length>=1?pool:fallback).sort(()=>Math.random()-.5).slice(0,2);}
 function showRelicPick(avail){gstate='relicpick';const cards=$$('relic-cards');cards.innerHTML='';avail.forEach((id,i)=>{const r=RELICS[id];const c=document.createElement('div');c.className='relic-card';c.style.borderColor=r.color;c.style.animationDelay=(i*.12)+'s';c.innerHTML=`<div class="relic-icon">${r.icon}</div><div class="relic-name" style="color:${r.color};">${r.name}</div><div class="relic-desc">${r.desc}</div><button class="relic-pick-btn" style="border-color:${r.color};color:${r.color};" onclick="pickRelic('${id}')">PICK</button>`;cards.appendChild(c);});$$('relic-overlay').style.display='flex';}
-function pickRelic(id){activeRelics.add(id);if(id==='beermug'){maxHP+=20;hp=Math.min(maxHP,hp+20);}updHUD();$$('relic-overlay').style.display='none';showWin();}
+function pickRelic(id){activeRelics.add(id);if(id==='beermug'){maxHP+=20;hp=Math.min(maxHP,hp+20);}updHUD();$$('relic-overlay').style.display='none';const wr=$$('win-retire');if(wr)wr.style.display='none';showWin();}
 
 // ══ Win/Reset ══
-function showWin(){gstate='win';const rank=gold>=200?'S — R Master':gold>=130?'A — R Expert':gold>=70?'B — Solid run':'C — Keep studying!';const stats=playerName+'\nHP: '+Math.max(0,hp)+'/'+maxHP+'\nGold: '+gold+'\nRelics: '+(activeRelics.size||'none')+'\nRank: '+rank;if(lvl<3){$$('win-title').textContent=lvl===1?'SOUR RON DEFEATED!':'THE KRACKER FALLS!';$$('win-sub').textContent='The journey continues...';$$('win-txt').textContent=stats+'\n\nGold + relics carry over!';$$('win-btn1').style.display='inline-block';$$('win-btn1').textContent='CONTINUE  →  LEVEL '+(lvl+1)+'  ↑';}else{$$('win-title').textContent='R MASTER';$$('win-sub').textContent='DR. AKE DEFEATED.';$$('win-txt').textContent=stats;$$('win-btn1').style.display='none';}$$('win').style.display='flex';}
-function ascendNext(){lvl++;mapNodes=generateMap();visited=new Set([0]);curId=0;bossHp=0;bossQIdx=0;updHUD();$$('win').style.display='none';gstate='map';}
-function startGame(){const inp=$$('player-name');playerName=(inp&&inp.value.trim())||'Adventurer';$$('name-row').textContent=playerName;$$('go-name').textContent=playerName+' fell in battle...';$$('start-screen').style.display='none';mapNodes=generateMap();visited=new Set([0]);curId=0;gstate='map';}
-function goToStart(){lvl=1;hp=80;maxHP=80;gold=0;inv={elim:0,hint:0};activeRelics=new Set();upgradedRelics=new Set();relicPool=['sprite','coin','wronghat','beermug'];bossHp=0;bossQIdx=0;studyBonus=false;fairyHintPending=false;activeId=null;elimIdx=-1;hintShown=false;activeQ=null;updHUD();['win','go'].forEach(id=>$$(id).style.display='none');$$('ov').style.display='none';$$('relic-overlay').style.display='none';gstate='start';const ss=$$('start-screen');ss.style.display='flex';const inp=$$('player-name');if(inp){inp.value='';setTimeout(()=>inp.focus(),300);}}
+function showWin(){gstate='win';const rank=gold>=200?'S — R Master':gold>=130?'A — R Expert':gold>=70?'B — Solid run':'C — Keep studying!';const stats=playerName+'\nHP: '+Math.max(0,hp)+'/'+maxHP+'\nGold: '+gold+'\nRelics: '+(activeRelics.size||'none')+'\nRank: '+rank;if(lvl<3){$$('win-title').textContent=lvl===1?'SOUR RON DEFEATED!':'THE KRACKER FALLS!';$$('win-sub').textContent='The journey continues...';$$('win-txt').textContent=stats+'\n\nGold + relics carry over!';$$('win-retire').style.display='inline-block';$$('win-btn1').style.display='inline-block';$$('win-btn1').textContent='CONTINUE  →  LEVEL '+(lvl+1)+'  ↑';}else{const d2=new Date();saveScore({name:playerName,gold,level:3,date:d2.getDate()+'/'+(d2.getMonth()+1)+'/'+d2.getFullYear()});$$('win-title').textContent='R MASTER';$$('win-sub').textContent='DR. AKE DEFEATED.';$$('win-txt').textContent=stats;$$('win-btn1').style.display='none';$$('win-retire').style.display='none';}$$('win').style.display='flex';}
+function ascendNext(){lvl++;usedQids=new Set();mapNodes=generateMap();visited=new Set([0]);curId=0;bossHp=0;bossQIdx=0;updHUD();$$('win').style.display='none';gstate='map';}
+function startGame(){const inp=$$('player-name');playerName=(inp&&inp.value.trim())||'Adventurer';$$('name-row').textContent=playerName;$$('go-name').textContent=playerName+' fell in battle...';usedQids=new Set();$$('start-screen').style.display='none';mapNodes=generateMap();visited=new Set([0]);curId=0;gstate='map';}
+function goToStart(){lvl=1;hp=80;maxHP=80;gold=0;inv={elim:0,hint:0};activeRelics=new Set();upgradedRelics=new Set();relicPool=['sprite','coin','wronghat','beermug'];bossHp=0;bossQIdx=0;usedQids=new Set();studyBonus=false;fairyHintPending=false;activeId=null;elimIdx=-1;hintShown=false;activeQ=null;updHUD();['win','go'].forEach(id=>$$(id).style.display='none');$$('ov').style.display='none';$$('relic-overlay').style.display='none';const wr=$$('win-retire');if(wr)wr.style.display='none';gstate='start';const ss=$$('start-screen');ss.style.display='flex';const inp=$$('player-name');if(inp){inp.value='';setTimeout(()=>inp.focus(),300);}}
 
 $$('ov-inp').addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Enter')submitTxt();});
 $$('player-name').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();startGame();}});
 updHUD();
 function loop(){requestAnimationFrame(loop);tick++;render();}
 requestAnimationFrame(loop);
+
+// ══ High Score System ════════════════════════════════════════════════════════
+const HS_KEY='rquest_highscores';
+function loadScores(){try{return JSON.parse(localStorage.getItem(HS_KEY)||'[]');}catch{return[];}}
+function saveScore(entry){
+  const scores=loadScores();
+  scores.push(entry);
+  scores.sort((a,b)=>b.gold-a.gold);
+  localStorage.setItem(HS_KEY,JSON.stringify(scores.slice(0,20)));
+}
+function openHighscores(){
+  const scores=loadScores();
+  const list=$$('hs-list');
+  if(!scores.length){
+    list.innerHTML='<div class="hs-empty">No runs recorded yet.<br>Complete a level to enter the leaderboard.</div>';
+  } else {
+    const levelLabel=l=>l>=3?'Completed all 3 levels':l===2?'Reached Level 3':'Reached Level 2';
+    list.innerHTML=scores.map((s,i)=>`
+      <div class="hs-entry">
+        <span class="hs-rank">#${i+1}</span>
+        <span class="hs-name">${s.name}</span>
+        <span class="hs-level">${levelLabel(s.level)} · ${s.date}</span>
+        <span class="hs-gold">◈ ${s.gold}g</span>
+      </div>`).join('');
+  }
+  $$('hs-modal').style.display='block';
+}
+function retireRun(){
+  const d=new Date();
+  const dateStr=d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
+  saveScore({name:playerName,gold,level:lvl,date:dateStr});
+  goToStart();
+}
+
+// ── How To Play narrative ────────────────────────────────────────────────────
+const HTP_TEXT=`You are a student who has chosen to learn one of the most powerful languages in data science — R. But the path to mastery is no straight road.
+
+The journey stretches before you through wild terrain: dense Shrubbery, a toxic river, and shadowy final frontiers. At every waypoint you will face opponents who do not want you to succeed.
+
+⚔  BATTLES
+Challenge nodes test your R knowledge. Easy foes (⚔★) ask for basics. Veterans (⚔★★) demand you know your tidyverse. Elites (⚔★★★) push into advanced territory. Answer correctly to earn gold. Answer wrong — you take damage.
+
+❤  HEALTH
+You start with 80 HP. If it reaches zero, the journey ends. Rest at taverns, campfires, and altars to recover.
+
+◈  GOLD
+Earn gold by winning battles. Spend it in shops on Shield items (removes a wrong answer) or Hint Scrolls (reveals a clue).
+
+🏪  SHOPS
+Found at purple hexagon nodes 🛒. Buy items before the next challenge.
+
+🍺  TAVERNS
+Rest to heal 50% of your max HP, or test your R probability skills in a Snail Race to win extra gold.
+
+?  EVENTS
+Mystery nodes with unexpected outcomes: ancient altars, wandering scholars, mystic flowers, mysterious chests and more. Each encounter is different.
+
+✦  RELICS
+Defeat a boss to claim a relic — powerful permanent upgrades. The Whispering Sprite gives hints. The Coin relic boosts gold. The Hat turns wrong answers into eliminated options. The Beer Mug raises your max HP.
+
+⚔  BOSSES
+At the end of each level a boss awaits — a powerful gatekeeper who will test everything you have learned. Each boss has a unique fighting style and a personal grudge against R students. Defeat them to earn a relic and progress.
+
+🏆  SCORING
+Your score is your gold total. You may retire after any boss victory and lock in your score. The further you go, the more gold you can earn — but also the more you can lose.
+
+Study hard. Choose wisely. The language is yours to master.`;
+document.addEventListener('DOMContentLoaded',()=>{
+  const el=document.getElementById('htp-body');
+  if(el)el.textContent=HTP_TEXT;
+});
+
 </script>
 </body>
 </html>
