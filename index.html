@@ -41,6 +41,11 @@ body{display:flex;align-items:center;justify-content:center;}
 .s-tip{font-family:var(--mono);font-size:clamp(8px,1vw,11px);color:rgba(80,110,130,0.8);letter-spacing:1px;animation:fadeUp 0.6s 0.5s ease both;opacity:0;}
 .s-embark{font-family:var(--mono);font-size:clamp(13px,1.6vw,18px);color:rgba(180,200,220,0.7);letter-spacing:4px;text-transform:uppercase;animation:fadeUp 0.6s 0.28s ease both;opacity:0;}
 
+
+#ov-stats{display:flex;gap:20px;align-items:center;margin-bottom:12px;padding:8px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);}
+#ov-hp{font-family:var(--mono);font-size:clamp(12px,1.5vw,16px);color:#d06060;letter-spacing:1px;}
+#ov-gold{font-family:var(--mono);font-size:clamp(12px,1.5vw,16px);color:#c9a84c;letter-spacing:1px;}
+
 /* ─── HUD ─────────────────── */
 #hud{position:absolute;top:0;left:0;right:0;z-index:15;display:flex;justify-content:space-between;align-items:flex-start;padding:12px 18px 0;pointer-events:none;}
 #hud-left,#hud-right{display:flex;flex-direction:column;gap:3px;}
@@ -111,20 +116,20 @@ body{display:flex;align-items:center;justify-content:center;}
 .tavern-sub{font-family:var(--mono);font-size:clamp(9px,1.1vw,12px);margin-left:28px;margin-top:3px;color:#4a6070;}
 
 /* ─── Snail Race ─────────── */
-#ov-snail{display:none;}
 .snail-title{font-family:var(--mono);font-size:clamp(14px,2vw,22px);font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:10px;text-align:center;}
-.snail-code-block{background:rgba(4,10,22,0.9);border:1px solid rgba(80,120,60,0.5);padding:10px 14px;margin-bottom:12px;font-family:var(--mono);font-size:clamp(12px,1.6vw,17px);color:#88cc66;line-height:1.6;white-space:pre-wrap;}
+.snail-intro-lbl{font-family:var(--mono);font-size:clamp(10px,1.3vw,14px);color:#6a8a7a;margin-bottom:10px;text-align:center;letter-spacing:1px;}
+.snail-code-block{background:rgba(4,10,22,.9);border:1px solid rgba(80,120,60,.5);padding:10px 14px;margin-bottom:14px;font-family:var(--mono);font-size:clamp(12px,1.6vw,17px);color:#88cc66;line-height:1.6;white-space:pre-wrap;}
 .snail-code-label{font-size:clamp(9px,1vw,11px);color:#4a6050;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
-.snail-layout{display:flex;gap:16px;align-items:center;margin:14px 0;}
-#snail-cv{flex-shrink:0;border:1px solid rgba(180,140,50,0.3);}
-.snail-right{flex:1;display:flex;flex-direction:column;gap:10px;}
+.snail-bet-row-outer{margin-bottom:14px;}
 .snail-bet-row{display:flex;align-items:center;gap:10px;}
 .snail-bet-row label{font-family:var(--mono);font-size:clamp(10px,1.2vw,13px);color:#8a9aaa;}
 #snail-bet-lbl{font-family:var(--mono);font-size:clamp(13px,1.8vw,20px);color:var(--gold-bright);min-width:40px;text-align:right;}
 #snail-bet{flex:1;accent-color:var(--gold);}
-#snail-race-btn{font-family:var(--mono);font-size:clamp(13px,1.8vw,20px);font-weight:700;padding:clamp(9px,1.4vh,14px) 24px;background:var(--gold);color:#030800;border:none;cursor:pointer;letter-spacing:2px;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:background .15s;}
-#snail-race-btn:hover{background:var(--gold-bright);}
-#snail-race-btn:disabled{opacity:.4;cursor:not-allowed;}
+.snail-opts{display:flex;gap:12px;margin-bottom:12px;}
+.snail-prob-btn{flex:1;font-family:var(--mono);font-size:clamp(16px,2.8vw,34px);font-weight:700;padding:clamp(14px,2.2vh,22px) 10px;background:rgba(10,16,32,.8);border:2px solid rgba(80,100,140,.5);color:#8a9ebc;cursor:pointer;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:border-color .15s,color .15s,background .15s;letter-spacing:1px;}
+.snail-prob-btn:hover{border-color:var(--gold);color:#f0e0a0;background:rgba(30,24,8,.8);}
+.snail-prob-btn:disabled{cursor:default;opacity:.6;}
+#snail-result-box{display:none;font-family:var(--mono);font-size:clamp(12px,1.5vw,16px);padding:10px 14px;border-left:3px solid #555;white-space:pre-wrap;margin-top:10px;}
 #snail-prob-reveal{display:none;font-family:var(--mono);font-size:clamp(9px,1.1vw,12px);color:#666;margin-top:6px;}
 #snail-result-box{display:none;font-family:var(--mono);font-size:clamp(12px,1.5vw,16px);padding:10px 14px;border-left:3px solid #555;white-space:pre-wrap;margin-top:10px;}
 
@@ -223,6 +228,7 @@ body{display:flex;align-items:center;justify-content:center;}
 <!-- OVERLAY -->
 <div id="ov">
   <div id="ov-badge"></div>
+  <div id="ov-stats"><span id="ov-hp"></span><span id="ov-gold"></span></div>
   <div id="boss-panel">
     <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px;">
       <img id="boss-img" src="" alt="Boss" style="display:none;"/>
@@ -279,23 +285,15 @@ body{display:flex;align-items:center;justify-content:center;}
   <!-- SNAIL RACE -->
   <div id="ov-snail">
     <div class="snail-title">🐌 SNAIL RACE</div>
+    <div class="snail-intro-lbl">Read the R code — what is the win probability?</div>
     <div class="snail-code-block">
       <div class="snail-code-label">Win condition (R):</div>
       <div id="snail-code"></div>
     </div>
-    <div class="snail-layout">
-      <canvas id="snail-cv" width="160" height="160"></canvas>
-      <div class="snail-right">
-        <div style="font-family:var(--mono);font-size:clamp(10px,1.2vw,13px);color:#6a8a7a;line-height:1.6;">Red = WIN · Black = LOSE<br>Pointer fixed at top.<br>Wheel spins to decide.</div>
-        <div class="snail-bet-row">
-          <label>Bet:</label>
-          <input type="range" id="snail-bet" min="5" max="100" step="5" value="10" oninput="updateSnailBet(this.value)">
-          <span id="snail-bet-lbl">10</span>g
-        </div>
-        <button id="snail-race-btn" onclick="doSnailRace()">🐌 RACE!</button>
-        <div id="snail-prob-reveal">Win zone: <span id="snail-win-pct">?</span>%</div>
-      </div>
+    <div class="snail-bet-row-outer">
+      <div class="snail-bet-row"><label>Bet:</label><input type="range" id="snail-bet" min="5" max="100" step="5" value="10" oninput="updateSnailBet(this.value)"><span id="snail-bet-lbl">10</span>g</div>
     </div>
+    <div class="snail-opts" id="snail-opts"></div>
     <div id="snail-result-box"></div>
   </div>
 
@@ -366,7 +364,7 @@ let gstate='start',tick=0,activeId=null;
 let elimIdx=-1,hintShown=false,activeQ=null,lvl=1;
 let bossHp=3,bossMaxHp=3,bossQIdx=0;
 let activeRelics=new Set(),upgradedRelics=new Set(),relicPool=['sprite','coin','wronghat','beermug'];
-let snailWinProb=.30,snailBetAmt=10,snailAngle=0,snailSpinning=false;
+let snailWinProb=.30,snailBetAmt=10,snailCorrectOpt=0;
 let studyBonus=false,fairyHintPending=false;
 let mapNodes=[],nodeMap=new Map();
 const $$=id=>document.getElementById(id);
@@ -410,43 +408,43 @@ const LEVEL_NAMES=['The Shrubbery','Toxic River','The Final Frontier'];
 
 // ══ Questions ══
 const QS1={
-  1:{badge:'WP·EASY',type:'mcq',q:'sum(c(2,4,6,8)) returns:',ch:['A) 14','B) 20','C) 8','D) Error'],ok:1,hint:'sum() adds all values.',ex:'Correct! ✓\n2+4+6+8 = 20'},
-  2:{badge:'WP·EASY',type:'mcq',q:'Most concise: create 1,2,3,4,5 in R:',ch:['A) seq(1,5)',  'B) c(1,2,3,4,5)','C) 1:5','D) int(1,5)'],ok:2,hint:'Colon operator for ranges.',ex:'Correct! ✓\n1:5'},
-  4:{badge:'WP·MED',type:'mcq',q:'Select column "height" from df:',ch:['A) df@height','B) df$height','C) df::height','D) df->height'],ok:1,hint:'Named element access.',ex:'Correct! ✓\ndf$height'},
-  5:{badge:'WP·EASY',type:'mcq',q:'nrow(df) returns:',ch:['A) Num columns','B) Col names','C) Num rows','D) Row indices'],ok:2,hint:'nrow = number of rows.',ex:'Correct! ✓\nNumber of rows.'},
-  6:{badge:'WP·MED',type:'mcq',q:'ggplot2: maps variables to visuals:',ch:['A) map()','B) theme()','C) aes()','D) scale()'],ok:2,hint:'aes = aesthetics.',ex:'Correct! ✓\naes()'},
-  7:{badge:'WP·MED',type:'mcq',q:'df|>group_by(sex)|>summarise(m=mean(age))\nreturns:',ch:['A) Filters by sex','B) Mean age per sex','C) Adds col m','D) Sorts rows'],ok:1,hint:'GROUP BY → aggregate.',ex:'Correct! ✓\nMean age per sex.'},
-  9:{badge:'WP·HARD',type:'mcq',q:'lapply() always returns:',ch:['A) A vector','B) A data frame','C) A list','D) A matrix'],ok:2,hint:'"l"=list.',ex:'Correct! ✓\nA list.'},
-  10:{badge:'WP·HARD',type:'text',q:'Body to return square of x:\nsquare <- function(x) { ___ }',ans:['return(x^2)','x^2','return(x*x)','x*x'],hint:'Last expression auto-returned.',ex:'Correct! ✓\nx^2'},
-  11:{badge:'WP·MED',type:'mcq',q:'paste() vs paste0():',ch:['A) paste0 faster','B) paste sep=" ", paste0 sep=""','C) paste0 max 2 args','D) Same'],ok:1,hint:'Default sep=?',ex:'Correct! ✓\npaste→"a b"\npaste0→"ab"'},
-  12:{badge:'WP·HARD',type:'mcq',q:'lm(y~x, data=df) fits:',ch:['A) Logistic','B) Linear regression','C) t-test','D) Correlation'],ok:1,hint:'lm=linear model.',ex:'Correct! ✓\nLinear regression.'},
-  13:{badge:'WP·HARD',type:'mcq',q:'Native pipe in base R ≥4.1:',ch:['A) %>%','B) ->>','C) |>','D) ::'],ok:2,hint:'Built-in since R 4.1.',ex:'Correct! ✓\n|>'},
+  1:{badge:'WP·EASY',type:'mcq',q:'sum(c(2,4,6,8)) returns:',ch:['A) 14','B) 20','C) 8','D) Error'],ok:1,hint:'sum() adds all values.',ex:'Correct! ✓\n\nsum() adds every element in the vector.\n2+4+6+8 = 20'},
+  2:{badge:'WP·EASY',type:'mcq',q:'Most concise: create 1,2,3,4,5 in R:',ch:['A) seq(1,5)',  'B) c(1,2,3,4,5)','C) 1:5','D) int(1,5)'],ok:2,hint:'Colon operator for ranges.',ex:'Correct! ✓\n\nThe colon operator creates an integer sequence.\n1:5 expands to c(1L, 2L, 3L, 4L, 5L)'},
+  4:{badge:'WP·MED',type:'mcq',q:'Select column "height" from df:',ch:['A) df@height','B) df$height','C) df::height','D) df->height'],ok:1,hint:'Named element access.',ex:'Correct! ✓\n\n$ extracts named elements from a list/data frame.\ndf$height pulls out the height column as a vector.'},
+  5:{badge:'WP·EASY',type:'mcq',q:'nrow(df) returns:',ch:['A) Num columns','B) Col names','C) Num rows','D) Row indices'],ok:2,hint:'nrow = number of rows.',ex:'Correct! ✓\n\nnrow() counts rows, ncol() counts columns.\ndim(df) returns both: c(rows, cols).'},
+  6:{badge:'WP·MED',type:'mcq',q:'ggplot2: maps variables to visuals:',ch:['A) map()','B) theme()','C) aes()','D) scale()'],ok:2,hint:'aes = aesthetics.',ex:'Correct! ✓\n\naes() maps data columns to visual properties:\nx, y, color, size, shape, fill, and more.'},
+  7:{badge:'WP·MED',type:'mcq',q:'df|>group_by(sex)|>summarise(m=mean(age))\nreturns:',ch:['A) Filters by sex','B) Mean age per sex','C) Adds col m','D) Sorts rows'],ok:1,hint:'GROUP BY → aggregate.',ex:'Correct! ✓\n\ngroup_by(sex) splits rows into groups.\nsummarise(m=mean(age)) collapses each group to one row.'},
+  9:{badge:'WP·HARD',type:'mcq',q:'lapply() always returns:',ch:['A) A vector','B) A data frame','C) A list','D) A matrix'],ok:2,hint:'"l"=list.',ex:'Correct! ✓\n\nlapply() always returns a list, length = input length.\nUse sapply() if you want a simplified vector instead.'},
+  10:{badge:'WP·HARD',type:'text',q:'Body to return square of x:\nsquare <- function(x) { ___ }',ans:['return(x^2)','x^2','return(x*x)','x*x'],hint:'Last expression auto-returned.',ex:'Correct! ✓\n\nR functions return the last evaluated expression.\nreturn() is optional — x^2 alone works perfectly.'},
+  11:{badge:'WP·MED',type:'mcq',q:'paste() vs paste0():',ch:['A) paste0 faster','B) paste sep=" ", paste0 sep=""','C) paste0 max 2 args','D) Same'],ok:1,hint:'Default sep=?',ex:'Correct! ✓\n\npaste("a","b")  → "a b"  (sep=" " by default)\npaste0("a","b") → "ab"   (sep="" no separator)'},
+  12:{badge:'WP·HARD',type:'mcq',q:'lm(y~x, data=df) fits:',ch:['A) Logistic','B) Linear regression','C) t-test','D) Correlation'],ok:1,hint:'lm=linear model.',ex:'Correct! ✓\n\nlm() fits a linear model (Ordinary Least Squares).\ny ~ x: y is the response, x is the predictor.'},
+  13:{badge:'WP·HARD',type:'mcq',q:'Native pipe in base R ≥4.1:',ch:['A) %>%','B) ->>','C) |>','D) ::'],ok:2,hint:'Built-in since R 4.1.',ex:'Correct! ✓\n\n|> is the native R pipe, added in R 4.1 (2021).\nNo packages needed — unlike %>% from magrittr.'},
 };
 const QS2={
-  1:{badge:'WP·EASY',type:'mcq',q:'class(TRUE) returns:',ch:['A) "boolean"','B) "numeric"','C) "logical"','D) "integer"'],ok:2,hint:'TRUE/FALSE type.',ex:'Correct! ✓\n"logical"'},
-  2:{badge:'WP·EASY',type:'mcq',q:'length(list(1,"a",c(1,2,3)))\nreturns:',ch:['A) 5','B) 3','C) 6','D) Error'],ok:1,hint:'Top-level elements.',ex:'Correct! ✓\n3'},
-  4:{badge:'WP·MED',type:'mcq',q:'dplyr: adds/modifies columns:',ch:['A) select()','B) filter()','C) mutate()','D) rename()'],ok:2,hint:'Create or transform.',ex:'Correct! ✓\nmutate()'},
-  5:{badge:'WP·EASY',type:'mcq',q:'is.na(NA) returns:',ch:['A) NULL','B) NA','C) TRUE','D) FALSE'],ok:2,hint:'is.na tests for missing.',ex:'Correct! ✓\nTRUE'},
-  6:{badge:'WP·MED',type:'mcq',q:'sapply(1:4, function(x) x^2)\nreturns:',ch:['A) A list','B) c(1,4,9,16)','C) c(1,2,3,4)','D) Error'],ok:1,hint:'sapply simplifies.',ex:'Correct! ✓\nc(1,4,9,16)'},
-  7:{badge:'WP·MED',type:'mcq',q:'pivot_longer(df,cols=-id)\ndoes what?',ch:['A) Removes id','B) Wide to long','C) Rows to cols','D) Sorts cols'],ok:1,hint:'Long=one obs per row.',ex:'Correct! ✓\nWide to long.'},
-  9:{badge:'WP·HARD',type:'mcq',q:'tryCatch({log(-1)},\nwarning=function(w)"caught")\nreturns:',ch:['A) NaN','B) Inf','C) "caught"','D) Error'],ok:2,hint:'log(-1)=warning.',ex:'Correct! ✓\n"caught"'},
-  10:{badge:'WP·HARD',type:'text',q:'mean() to ignore NAs:\nmean(x, ___)',ans:['na.rm=true','na.rm=t','na.rm'],hint:'NA remove flag.',ex:'Correct! ✓\nna.rm=TRUE'},
-  11:{badge:'WP·MED',type:'mcq',q:'which.max(c(3,1,4,1,5,9,2,6))\nreturns:',ch:['A) 9','B) 6','C) 8','D) 1'],ok:1,hint:'Returns INDEX not value.',ex:'Correct! ✓\n6 (index of 9)'},
-  12:{badge:'WP·HARD',type:'mcq',q:'Reduce("+",1:5) returns:',ch:['A) c(1,3,6,10,15)','B) 15','C) 120','D) Error'],ok:1,hint:'Cumulative reduction.',ex:'Correct! ✓\n15'},
-  13:{badge:'WP·HARD',type:'mcq',q:'cumsum(c(1,2,3,4)) returns:',ch:['A) 10','B) c(1,3,6,10)','C) c(1,2,3,4)','D) c(4,3,2,1)'],ok:1,hint:'Running total.',ex:'Correct! ✓\nc(1,3,6,10)'},
+  1:{badge:'WP·EASY',type:'mcq',q:'class(TRUE) returns:',ch:['A) "boolean"','B) "numeric"','C) "logical"','D) "integer"'],ok:2,hint:'TRUE/FALSE type.',ex:'Correct! ✓\n\nTRUE / FALSE are class "logical" in R.\nNote: "boolean" is JavaScript terminology, not R.'},
+  2:{badge:'WP·EASY',type:'mcq',q:'length(list(1,"a",c(1,2,3)))\nreturns:',ch:['A) 5','B) 3','C) 6','D) Error'],ok:1,hint:'Top-level elements.',ex:'Correct! ✓\n\nlength() counts top-level elements in a list.\nThe nested c(1,2,3) counts as ONE element.'},
+  4:{badge:'WP·MED',type:'mcq',q:'dplyr: adds/modifies columns:',ch:['A) select()','B) filter()','C) mutate()','D) rename()'],ok:2,hint:'Create or transform.',ex:'Correct! ✓\n\nmutate() adds or transforms columns.\nThe original columns remain — nothing is deleted.'},
+  5:{badge:'WP·EASY',type:'mcq',q:'is.na(NA) returns:',ch:['A) NULL','B) NA','C) TRUE','D) FALSE'],ok:2,hint:'is.na tests for missing.',ex:'Correct! ✓\n\nis.na(NA) → TRUE.\nImportant: NA == NA gives NA, not TRUE — always use is.na().'},
+  6:{badge:'WP·MED',type:'mcq',q:'sapply(1:4, function(x) x^2)\nreturns:',ch:['A) A list','B) c(1,4,9,16)','C) c(1,2,3,4)','D) Error'],ok:1,hint:'sapply simplifies.',ex:'Correct! ✓\n\nsapply() applies a function and simplifies output.\n1²=1, 2²=4, 3²=9, 4²=16 → c(1, 4, 9, 16)'},
+  7:{badge:'WP·MED',type:'mcq',q:'pivot_longer(df,cols=-id)\ndoes what?',ch:['A) Removes id','B) Wide to long','C) Rows to cols','D) Sorts cols'],ok:1,hint:'Long=one obs per row.',ex:'Correct! ✓\n\npivot_longer() converts wide to long format.\nEach non-id column becomes its own row.'},
+  9:{badge:'WP·HARD',type:'mcq',q:'tryCatch({log(-1)},\nwarning=function(w)"caught")\nreturns:',ch:['A) NaN','B) Inf','C) "caught"','D) Error'],ok:2,hint:'log(-1)=warning.',ex:'Correct! ✓\n\nlog(-1) raises a warning (not an error).\ntryCatch catches it and returns the handler value.'},
+  10:{badge:'WP·HARD',type:'text',q:'mean() to ignore NAs:\nmean(x, ___)',ans:['na.rm=true','na.rm=t','na.rm'],hint:'NA remove flag.',ex:'Correct! ✓\n\nna.rm=TRUE tells mean() to silently skip NAs.\nWithout it, mean(c(1, NA, 3)) returns NA.'},
+  11:{badge:'WP·MED',type:'mcq',q:'which.max(c(3,1,4,1,5,9,2,6))\nreturns:',ch:['A) 9','B) 6','C) 8','D) 1'],ok:1,hint:'Returns INDEX not value.',ex:'Correct! ✓\n\nwhich.max() returns the INDEX of the max value.\nThe value 9 is at position 6 in the vector.'},
+  12:{badge:'WP·HARD',type:'mcq',q:'Reduce("+",1:5) returns:',ch:['A) c(1,3,6,10,15)','B) 15','C) 120','D) Error'],ok:1,hint:'Cumulative reduction.',ex:'Correct! ✓\n\nReduce applies + cumulatively: ((((1+2)+3)+4)+5).\nThe accumulate=TRUE variant returns all intermediate sums.'},
+  13:{badge:'WP·HARD',type:'mcq',q:'cumsum(c(1,2,3,4)) returns:',ch:['A) 10','B) c(1,3,6,10)','C) c(1,2,3,4)','D) c(4,3,2,1)'],ok:1,hint:'Running total.',ex:'Correct! ✓\n\ncumsum() returns a running total vector.\n1, 1+2=3, 3+3=6, 6+4=10 → c(1, 3, 6, 10)'},
 };
 const QS3={
-  1:{badge:'WP·EASY',type:'mcq',q:'Sys.time() class:',ch:['A) "Date"','B) "POSIXct"/"POSIXt"','C) "numeric"','D) "difftime"'],ok:1,hint:'POSIXct=calendar time.',ex:'Correct! ✓\n"POSIXct"'},
-  2:{badge:'WP·EASY',type:'mcq',q:'Checks if x is a data frame:',ch:['A) class(x)=="df"','B) is.data.frame(x)','C) typeof(x)=="list"','D) inherits(x,"frame")'],ok:1,hint:'Dedicated is.*() fn.',ex:'Correct! ✓\nis.data.frame(x)'},
-  4:{badge:'WP·MED',type:'mcq',q:'which(c(F,T,F,T,T)) returns:',ch:['A) c(1,3,5)','B) c(2,4,5)','C) logical vec','D) TRUE'],ok:1,hint:'which()=indices of TRUEs.',ex:'Correct! ✓\nc(2,4,5)'},
-  5:{badge:'WP·EASY',type:'mcq',q:'setdiff(c(1,2,3,4),c(2,4)) returns:',ch:['A) c(1,3)','B) c(2,4)','C) c(1,2,3,4)','D) NULL'],ok:0,hint:'Elements in 1st NOT in 2nd.',ex:'Correct! ✓\nc(1,3)'},
-  6:{badge:'WP·MED',type:'mcq',q:'environment(f) returns:',ch:['A) Calling env','B) Enclosing env\nwhere f was defined','C) Global env','D) NULL'],ok:1,hint:'Functions capture def env.',ex:'Correct! ✓\nEnclosing env.'},
-  7:{badge:'WP·MED',type:'mcq',q:'Reduce("+",1:5,accumulate=TRUE)\nreturns:',ch:['A) 15','B) c(1,3,6,10,15)','C) c(1,2,3,4,5)','D) Error'],ok:1,hint:'accumulate=TRUE=running.',ex:'Correct! ✓\nc(1,3,6,10,15)'},
-  9:{badge:'WP·HARD',type:'mcq',q:'A closure in R:',ch:['A) Uses <<-','B) Captures vars\nfrom enclosing scope','C) Takes fn arg','D) Returns list'],ok:1,hint:'Closures close over env.',ex:'Correct! ✓\nCaptures enclosing scope.'},
-  10:{badge:'WP·HARD',type:'text',q:'R package for line-by-line profiling:\n___(expr)',ans:['profvis','profvis(expr)','profvis(','profvis()'],hint:'profvis package.',ex:'Correct! ✓\nprofvis({...})'},
-  11:{badge:'WP·MED',type:'mcq',q:'x<-5;f<-function(){x<<-10};f();x\nreturns:',ch:['A) 5','B) NULL','C) 10','D) Error'],ok:2,hint:'<<-=parent scope.',ex:'Correct! ✓\n10'},
-  12:{badge:'WP·HARD',type:'mcq',q:'UseMethod("foo") inside foo():',ch:['A) Recursive call','B) Dispatches foo.class(x)\nbased on 1st arg','C) Registers generic','D) Exports fn'],ok:1,hint:'S3 dispatch.',ex:'Correct! ✓\nDispatches to foo.ClassName()'},
-  13:{badge:'WP·HARD',type:'mcq',q:'Rcpp::sourceCpp("file.cpp"):',ch:['A) Runs Python','B) Compiles C++→loads\nfns into R','C) Profiles','D) SQL'],ok:1,hint:'Rcpp=R+C++ bridge.',ex:'Correct! ✓\nC++ callable from R.'},
+  1:{badge:'WP·EASY',type:'mcq',q:'Sys.time() class:',ch:['A) "Date"','B) "POSIXct"/"POSIXt"','C) "numeric"','D) "difftime"'],ok:1,hint:'POSIXct=calendar time.',ex:'Correct! ✓\n\nSys.time() returns class POSIXct and POSIXt.\nPOSIXct stores seconds since 1970-01-01 as a double.'},
+  2:{badge:'WP·EASY',type:'mcq',q:'Checks if x is a data frame:',ch:['A) class(x)=="df"','B) is.data.frame(x)','C) typeof(x)=="list"','D) inherits(x,"frame")'],ok:1,hint:'Dedicated is.*() fn.',ex:'Correct! ✓\n\nis.data.frame() is the correct predicate.\ntypeof(df) returns "list" which is not a reliable check.'},
+  4:{badge:'WP·MED',type:'mcq',q:'which(c(F,T,F,T,T)) returns:',ch:['A) c(1,3,5)','B) c(2,4,5)','C) logical vec','D) TRUE'],ok:1,hint:'which()=indices of TRUEs.',ex:'Correct! ✓\n\nwhich() returns indices where the condition is TRUE.\nc(F,T,F,T,T) → positions 2, 4, and 5.'},
+  5:{badge:'WP·EASY',type:'mcq',q:'setdiff(c(1,2,3,4),c(2,4)) returns:',ch:['A) c(1,3)','B) c(2,4)','C) c(1,2,3,4)','D) NULL'],ok:0,hint:'Elements in 1st NOT in 2nd.',ex:'Correct! ✓\n\nsetdiff(A, B) = elements in A but NOT in B.\nc(1,2,3,4) minus c(2,4) = c(1, 3)'},
+  6:{badge:'WP·MED',type:'mcq',q:'environment(f) returns:',ch:['A) Calling env','B) Enclosing env\nwhere f was defined','C) Global env','D) NULL'],ok:1,hint:'Functions capture def env.',ex:'Correct! ✓\n\nenvironment(f) = the env where f was defined.\nThis is the basis of closures in R.'},
+  7:{badge:'WP·MED',type:'mcq',q:'Reduce("+",1:5,accumulate=TRUE)\nreturns:',ch:['A) 15','B) c(1,3,6,10,15)','C) c(1,2,3,4,5)','D) Error'],ok:1,hint:'accumulate=TRUE=running.',ex:'Correct! ✓\n\naccumulate=TRUE keeps all intermediate results.\n1, 3, 6, 10, 15 are the running sums.'},
+  9:{badge:'WP·HARD',type:'mcq',q:'A closure in R:',ch:['A) Uses <<-','B) Captures vars\nfrom enclosing scope','C) Takes fn arg','D) Returns list'],ok:1,hint:'Closures close over env.',ex:'Correct! ✓\n\nA closure = function + its enclosing environment.\nIt "closes over" free variables at definition time.'},
+  10:{badge:'WP·HARD',type:'text',q:'R package for line-by-line profiling:\n___(expr)',ans:['profvis','profvis(expr)','profvis(','profvis()'],hint:'profvis package.',ex:'Correct! ✓\n\nprofvis() creates an interactive flame graph.\nIt profiles code line-by-line for time and memory.'},
+  11:{badge:'WP·MED',type:'mcq',q:'x<-5;f<-function(){x<<-10};f();x\nreturns:',ch:['A) 5','B) NULL','C) 10','D) Error'],ok:2,hint:'<<-=parent scope.',ex:'Correct! ✓\n\n<<- walks up parent frames and assigns there.\nf() sets x = 10 in the global environment.'},
+  12:{badge:'WP·HARD',type:'mcq',q:'UseMethod("foo") inside foo():',ch:['A) Recursive call','B) Dispatches foo.class(x)\nbased on 1st arg','C) Registers generic','D) Exports fn'],ok:1,hint:'S3 dispatch.',ex:'Correct! ✓\n\nUseMethod() triggers S3 dispatch.\nIt calls foo.ClassName() based on class(first_arg).'},
+  13:{badge:'WP·HARD',type:'mcq',q:'Rcpp::sourceCpp("file.cpp"):',ch:['A) Runs Python','B) Compiles C++→loads\nfns into R','C) Profiles','D) SQL'],ok:1,hint:'Rcpp=R+C++ bridge.',ex:'Correct! ✓\n\nsourceCpp() compiles the .cpp file and loads functions.\nRcpp is the standard bridge for performance-critical R code.'},
 };
 function getQ(qid){return(lvl===1?QS1:lvl===2?QS2:QS3)[qid];}
 const BOSS_QS={
@@ -476,7 +474,7 @@ function shuffleQ(q){if(q.type!=='mcq')return{...q};const ord=q.ch.map((_,i)=>i)
 
 // ══ Map Generation ══
 const Q_POOLS={easy:[1,2,5],medium:[4,6,7,11],hard:[9,10,12,13]};
-const EVENT_IDS=['altar','fairy','chest','campfire','scholar','anvil'];
+const EVENT_IDS=['altar','fairy','chest','campfire','scholar','anvil','flower'];
 function generateMap(){
   const rows=[];let nid=0;
   const counts=[1];
@@ -488,11 +486,14 @@ function generateMap(){
     for(let c=0;c<cnt;c++){
       const fx=(c+1)/(cnt+1);let type,qid=null,eventType=null;
       if(r===0){type='start';}else if(r===10){type='boss';}
-      else{
+      else if(r===1){
+        // Row 1: always easy battles — gentle start
+        type='easy';qid=Q_POOLS.easy[Math.floor(Math.random()*Q_POOLS.easy.length)];
+      } else {
         const roll=Math.random();
         if(roll<.20){type='event';eventType=EVENT_IDS[Math.floor(Math.random()*EVENT_IDS.length)];}
         else if(roll<.33){type='shop';}else if(roll<.43){type='tavern';}
-        else{const dr=Math.random(),ew=Math.max(0,.40-r*.04),mw=.35;type=dr<ew?'easy':dr<ew+mw?'medium':'hard';qid=Q_POOLS[type][Math.floor(Math.random()*Q_POOLS[type].length)];}
+        else{const dr=Math.random(),ew=Math.max(0,0.65-(r-1)*0.075),mw=Math.min(0.38,0.25+(r-1)*0.018);type=dr<ew?'easy':dr<ew+mw?'medium':'hard';qid=Q_POOLS[type][Math.floor(Math.random()*Q_POOLS[type].length)];}
       }
       rn.push({id:nid++,type,row:r,col:c,colTotal:cnt,fx,fy,next:[],qid,eventType});
     }
@@ -519,6 +520,8 @@ function bossR(){return nodeR()*1.65;}
 // ══ HUD ══
 function updHUD(){
   $$('hp-v').textContent=Math.max(0,hp);$$('maxhp-v').textContent=maxHP;$$('gold-v').textContent=gold;
+  // overlay mini-HUD
+  const ovh=$$('ov-hp'),ovg=$$('ov-gold');if(ovh)ovh.textContent='❤ '+Math.max(0,hp)+'/'+maxHP;if(ovg)ovg.textContent='◈ '+gold+' g';
   $$('inv-e').textContent=inv.elim;$$('inv-h').textContent=inv.hint;
   $$('hp-row').style.color=hp<20?'#e03030':hp<40?'#e07030':'#d06060';
   $$('lvl-v').textContent=lvl;$$('lvl-row').style.color=lvl===3?'#e06020':lvl===2?'#9060c0':'#4a9050';
@@ -583,9 +586,26 @@ function drawBg(){
 }
 function hexP(cx,cy,r){ctx.beginPath();for(let i=0;i<6;i++){const a=Math.PI/3*i+Math.PI/6,px=cx+r*Math.cos(a),py=cy+r*Math.sin(a);i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);}ctx.closePath();}
 function drawPaths(){
-  ctx.lineCap='round';ctx.setLineDash([]);
+  ctx.lineCap='round';
   const avail=new Set(getNode(curId)?.next||[]);
-  for(const n of mapNodes){for(const tid of n.next){const t=getNode(tid);if(!t)continue;const isNext=avail.has(tid)&&n.id===curId,done=visited.has(n.id)&&visited.has(tid);ctx.beginPath();const mx=(nx(n)+nx(t))/2+(ny(t)-ny(n))*.07,my=(ny(n)+ny(t))/2;ctx.moveTo(nx(n),ny(n));ctx.quadraticCurveTo(mx,my,nx(t),ny(t));if(isNext){ctx.shadowBlur=12;ctx.shadowColor=TC[t.type]?.stroke||'#888';ctx.strokeStyle=TC[t.type]?.stroke||'#888';ctx.lineWidth=2.5;ctx.globalAlpha=.72;}else if(done){ctx.shadowBlur=0;ctx.strokeStyle='rgba(80,70,50,.5)';ctx.lineWidth=1.5;ctx.globalAlpha=.5;}else{ctx.shadowBlur=0;ctx.strokeStyle='rgba(40,40,60,.55)';ctx.lineWidth=1.2;ctx.globalAlpha=.3;}ctx.stroke();ctx.shadowBlur=0;ctx.globalAlpha=1;}}ctx.setLineDash([]);
+  for(const n of mapNodes){for(const tid of n.next){const t=getNode(tid);if(!t)continue;
+    const isNext=avail.has(tid)&&n.id===curId,done=visited.has(n.id)&&visited.has(tid);
+    ctx.beginPath();
+    const mx=(nx(n)+nx(t))/2+(ny(t)-ny(n))*.07,my=(ny(n)+ny(t))/2;
+    ctx.moveTo(nx(n),ny(n));ctx.quadraticCurveTo(mx,my,nx(t),ny(t));
+    if(isNext){
+      ctx.setLineDash([10,7]);ctx.shadowBlur=14;ctx.shadowColor=TC[t.type]?.stroke||'#888';
+      ctx.strokeStyle=TC[t.type]?.stroke||'#888';ctx.lineWidth=4;ctx.globalAlpha=.85;
+    }else if(done){
+      ctx.setLineDash([6,8]);ctx.shadowBlur=0;
+      ctx.strokeStyle='rgba(100,90,60,.6)';ctx.lineWidth=2.5;ctx.globalAlpha=.55;
+    }else{
+      ctx.setLineDash([4,10]);ctx.shadowBlur=0;
+      ctx.strokeStyle='rgba(50,55,80,.7)';ctx.lineWidth=2;ctx.globalAlpha=.32;
+    }
+    ctx.stroke();ctx.shadowBlur=0;ctx.globalAlpha=1;
+  }}
+  ctx.setLineDash([]);
 }
 function drawNodes(){
   if(!mapNodes.length)return;
@@ -607,13 +627,41 @@ function drawNodes(){
       const qs=1+Math.sin(tick*.08+n.id)*.06;ctx.save();ctx.translate(x,y);ctx.scale(qs,qs);ctx.fillStyle=dn&&!cur?'rgba(120,80,180,.4)':'rgba(210,160,255,.95)';ctx.font=`bold ${Math.max(12,R*.62)}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('?',0,0);ctx.restore();
     } else if(n.type==='shop'){
       const h=SH/2;if(av&&!dn&&Math.floor(tick/22)%2===0){ctx.shadowBlur=14+pulse*12;ctx.shadowColor=col.glow;ctx.beginPath();ctx.moveTo(x,y-h-7);ctx.lineTo(x+h*.6+5,y);ctx.lineTo(x,y+h+7);ctx.lineTo(x-h*.6-5,y);ctx.closePath();ctx.strokeStyle=`rgba(160,100,230,${.18+pulse*.35})`;ctx.lineWidth=1.5;ctx.stroke();ctx.shadowBlur=0;}
-      ctx.shadowBlur=av||cur?10:0;ctx.shadowColor=col.glow;ctx.beginPath();ctx.moveTo(x,y-h);ctx.lineTo(x+h*.6,y);ctx.lineTo(x,y+h);ctx.lineTo(x-h*.6,y);ctx.closePath();const dg=ctx.createLinearGradient(x,y-h,x,y+h);dg.addColorStop(0,dn&&!cur?'#100820':'#251240');dg.addColorStop(1,dn&&!cur?'#0a0614':'#150a28');ctx.fillStyle=dg;ctx.fill();ctx.strokeStyle=dn&&!cur?'rgba(80,50,120,.35)':cur?'#fff':av?col.stroke:'rgba(60,40,90,.4)';ctx.lineWidth=cur?2.5:1.5;ctx.stroke();ctx.shadowBlur=0;ctx.fillStyle=dn&&!cur?'#554470':'#d8b8ff';ctx.font=`bold ${fs2}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('SHOP',x,y);
+      ctx.shadowBlur=av||cur?10:0;ctx.shadowColor=col.glow;ctx.beginPath();ctx.moveTo(x,y-h);ctx.lineTo(x+h*.6,y);ctx.lineTo(x,y+h);ctx.lineTo(x-h*.6,y);ctx.closePath();const dg=ctx.createLinearGradient(x,y-h,x,y+h);dg.addColorStop(0,dn&&!cur?'#100820':'#251240');dg.addColorStop(1,dn&&!cur?'#0a0614':'#150a28');ctx.fillStyle=dg;ctx.fill();ctx.strokeStyle=dn&&!cur?'rgba(80,50,120,.35)':cur?'#fff':av?col.stroke:'rgba(60,40,90,.4)';ctx.lineWidth=cur?2.5:1.5;ctx.stroke();ctx.shadowBlur=0;// Shop diamond: cart icon + SHOP text
+ctx.font=`${Math.max(13,R*.56)}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';
+ctx.fillStyle=dn&&!cur?'rgba(120,80,180,.35)':'rgba(210,170,255,.9)';
+ctx.fillText('🛒',x,y-R*.18);
+ctx.font=`bold ${Math.max(8,R*.3)}px monospace`;
+ctx.fillStyle=dn&&!cur?'#554470':'#d8b8ff';
+ctx.fillText('SHOP',x,y+R*.62);
     } else if(n.type==='tavern'){
       if(av&&!dn){ctx.shadowBlur=8+pulse*14;ctx.shadowColor=col.glow;hexP(x,y,R+8+pulse*4);ctx.strokeStyle=`rgba(192,120,32,${.2+pulse*.4})`;ctx.lineWidth=1.5;ctx.stroke();ctx.shadowBlur=0;}
       ctx.shadowBlur=av||cur?8:0;ctx.shadowColor=col.glow;hexP(x,y,R);const tg=ctx.createRadialGradient(x,y-R*.25,0,x,y,R);tg.addColorStop(0,'#401e08');tg.addColorStop(1,'#250e04');ctx.fillStyle=dn&&!cur?'#1a1006':tg;ctx.fill();ctx.strokeStyle=dn&&!cur?'rgba(100,70,20,.35)':cur?'#fff':av?col.stroke:'rgba(70,50,10,.4)';ctx.lineWidth=cur?2.5:1.5;ctx.stroke();ctx.shadowBlur=0;ctx.fillStyle=dn&&!cur?'rgba(140,90,30,.5)':'rgba(230,180,60,.95)';ctx.font=`${Math.max(10,R*.5)}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🍺',x,y-1);ctx.font=`${Math.max(7,R*.27)}px monospace`;ctx.fillStyle=dn&&!cur?'rgba(100,70,20,.5)':'rgba(200,150,50,.8)';ctx.fillText('TAVERN',x,y+R*.72);
     } else {
       if(av&&!dn){ctx.shadowBlur=8+pulse*14;ctx.shadowColor=col.glow;hexP(x,y,R+8+pulse*4);ctx.strokeStyle=`rgba(180,140,30,${.2+pulse*.4})`;ctx.lineWidth=1.5;ctx.stroke();ctx.shadowBlur=0;}
-      ctx.shadowBlur=av||cur?8:0;ctx.shadowColor=col.glow;hexP(x,y,R);const hg=ctx.createRadialGradient(x,y-R*.25,0,x,y,R);hg.addColorStop(0,dn&&!cur?'#252333':col.fill+'cc');hg.addColorStop(1,dn&&!cur?'#1c1a28':col.fill);ctx.fillStyle=hg;ctx.fill();ctx.strokeStyle=dn&&!cur?'rgba(80,80,100,.3)':cur?'#fff':av?col.stroke:'rgba(60,60,80,.35)';ctx.lineWidth=cur?2.5:1.5;ctx.stroke();ctx.shadowBlur=0;ctx.fillStyle=dn&&!cur?'rgba(160,160,180,.35)':'rgba(230,230,240,.92)';ctx.font=`bold ${fs}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(TL[n.type]||'?',x,y);
+      ctx.shadowBlur=av||cur?8:0;ctx.shadowColor=col.glow;hexP(x,y,R);const hg=ctx.createRadialGradient(x,y-R*.25,0,x,y,R);hg.addColorStop(0,dn&&!cur?'#252333':col.fill+'cc');hg.addColorStop(1,dn&&!cur?'#1c1a28':col.fill);ctx.fillStyle=hg;ctx.fill();ctx.strokeStyle=dn&&!cur?'rgba(80,80,100,.3)':cur?'#fff':av?col.stroke:'rgba(60,60,80,.35)';ctx.lineWidth=cur?2.5:1.5;ctx.stroke();ctx.shadowBlur=0;// Battle nodes: sword icon + star rating; shop: cart icon
+const stars={easy:'★',medium:'★★',hard:'★★★'};
+if(n.type==='easy'||n.type==='medium'||n.type==='hard'){
+  // Sword emoji top, stars bottom
+  const active=!(dn&&!cur);
+  ctx.font=`${Math.max(11,R*.52)}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillStyle=active?'rgba(230,230,240,.92)':'rgba(160,160,180,.3)';
+  ctx.fillText('⚔',x,y-R*.22);
+  ctx.font=`bold ${Math.max(9,R*.34)}px monospace`;
+  const starCol={easy:active?'#80cc60':'rgba(120,180,90,.3)',medium:active?'#e0a020':'rgba(180,130,20,.3)',hard:active?'#e04040':'rgba(180,60,60,.3)'}[n.type];
+  ctx.fillStyle=starCol;
+  ctx.fillText(stars[n.type],x,y+R*.38);
+} else if(n.type==='shop'){
+  // Already handled above with SHOP text - but let's replace with icon
+  ctx.font=`${Math.max(13,R*.58)}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillStyle=dn&&!cur?'rgba(140,100,200,.35)':'rgba(210,170,255,.9)';
+  ctx.fillText('🛒',x,y-R*.1);
+  ctx.font=`bold ${Math.max(8,R*.3)}px monospace`;
+  ctx.fillStyle=dn&&!cur?'rgba(100,70,160,.4)':'rgba(190,150,240,.75)';
+  ctx.fillText('SHOP',x,y+R*.72);
+} else {
+  ctx.fillStyle=dn&&!cur?'rgba(160,160,180,.35)':'rgba(230,230,240,.92)';ctx.font=`bold ${fs}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(TL[n.type]||'?',x,y);
+}
     }
     if(dn&&n.type!=='start'){ctx.fillStyle=n.type==='boss'?'rgba(200,220,100,.6)':n.type==='event'?'rgba(160,120,255,.6)':'rgba(80,200,100,.5)';ctx.font=`${Math.max(7,R*.32)}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('✓',x,n.type==='boss'?y+BR*.65:y+R*.88);}
     ctx.globalAlpha=1;
@@ -679,6 +727,7 @@ function openEvent(n){
     chest:{title:'📦 MYSTERIOUS CHEST',flavor:'A weathered chest sits at a fork in the path.',choices:[{icon:'🔓',label:'OPEN CHEST',desc:'50% +35 gold · 50% −22 HP (trap!)',fn:openChest},{icon:'🚶',label:'LEAVE IT',desc:'Not worth the risk',fn:evLeave}]},
     campfire:{title:'🔥 CAMPFIRE',flavor:'Warmth and rest beckon from a glowing fire.',choices:[{icon:'😴',label:'REST',desc:'Heal 30 HP',fn:cfRest},{icon:'📖',label:'STUDY',desc:'Next combat: hint auto-revealed',fn:cfStudy}]},
     anvil:{title:'⚒️ THE SMITH',flavor:'A weathered blacksmith has set up a forge by the roadside. The smell of hot iron fills the air.',choices:[{icon:'⚒️',label:'UPGRADE RELIC (25g)',desc:getUpDesc2(),fn:anvilUpgrade},{icon:'🚶',label:'PASS BY',desc:'',fn:evLeave}]},
+    flower:{title:'🌸 MYSTIC FLOWER',flavor:'A flower of unknown color grows at the crossroads. Legend says guessing its true color brings fortune.',choices:flowerChoices()},
     scholar:{title:'🧙 WANDERING SCHOLAR',flavor:"An eccentric academic has set up shop in your path.",choices:[{icon:'🛡️',label:'BUY SHIELD',desc:'15g → +1 shield (have: '+inv.elim+')',fn:()=>schBuy('elim')},{icon:'📜',label:'BUY HINT',desc:'10g → +1 hint (have: '+inv.hint+')',fn:()=>schBuy('hint')},{icon:'🚶',label:'LEAVE',desc:'',fn:evLeave}]},
   };
   const def=defs[n.eventType];if(!def){visitLeave();return;}
@@ -687,6 +736,37 @@ function openEvent(n){
   const ch=$$('ev-choices');ch.innerHTML='';
   def.choices.forEach(c=>{const btn=document.createElement('button');btn.className='ev-choice-btn';btn.innerHTML='<strong>'+c.icon+' '+c.label+'</strong><span class="ev-choice-desc"> — '+c.desc+'</span>';btn.onclick=c.fn;ch.appendChild(btn);});
   $$('ov-event').style.display='block';gstate='event';
+}
+// ── Flower event ──────────────────────────────────────────────────────────
+const FLOWER_COLORS=[
+  {name:'Red',    emoji:'🌹', hex:'#e03030'},
+  {name:'Blue',   emoji:'💙', hex:'#3060e0'},
+  {name:'Yellow', emoji:'🌻', hex:'#e0c020'},
+  {name:'Purple', emoji:'💜', hex:'#a030c0'},
+  {name:'White',  emoji:'🤍', hex:'#c0c8d8'},
+  {name:'Pink',   emoji:'🌸', hex:'#e06090'},
+];
+function flowerChoices(){
+  const correct=Math.floor(Math.random()*FLOWER_COLORS.length);
+  // pick 4 options including the correct one
+  const pool=[...FLOWER_COLORS.keys()].sort(()=>Math.random()-.5).slice(0,4);
+  if(!pool.includes(correct))pool[3]=correct;
+  pool.sort(()=>Math.random()-.5);
+  return pool.map(i=>({
+    icon:FLOWER_COLORS[i].emoji,
+    label:FLOWER_COLORS[i].name,
+    desc:'',
+    fn:()=>guessFlower(i===correct),
+  }));
+}
+function guessFlower(correct){
+  if(correct){
+    if(hp>=maxHP){gold+=25;updHUD();showGoldBlink('+25 gold!');showRes('✨ Correct! The flower\'s true colour revealed!\n\n+25 gold — fortune favours the knowledgeable!','#3a9050','#4ab060','CONTINUE →');}
+    else{const h=Math.min(maxHP-hp,30);hp=Math.min(maxHP,hp+h);updHUD();showGoldBlink('+'+h+' HP');showRes('✨ Correct! The flower blooms with light!\n\n+'+h+' HP restored!','#3a9050','#4ab060','CONTINUE →');}
+  } else {
+    showRes('✗ Wrong colour. The flower shimmers and fades.\n\nBetter luck at the next crossroads.','#664466','#aa88aa','CONTINUE →');
+  }
+  gstate='result';
 }
 function altarHeal(){hp=Math.min(maxHP,hp+25);updHUD();showGoldBlink('+25 HP');showRes('You prayed at the altar.\n\n+25 HP restored!','#2858c8','#6090e0','CONTINUE →');gstate='result';}
 function altarUpgrade(){
@@ -707,11 +787,57 @@ function openTavern(){setBadge('🍺 THE TAVERN','#c07820');$$('ov-q').textConte
 function chooseTavern(opt){if(opt==='rest'){const h=Math.floor(maxHP*.5)+(activeRelics.has('beermug')?beermugBonus():0);hp=Math.min(maxHP,hp+h);updHUD();showGoldBlink('+'+h+' HP');showRes('Rested.\n+'+h+' HP!'+(activeRelics.has('beermug')?'\n(Beer Mug 🍺 bonus!)':''),'#2858c8','#6090e0','LEAVE TAVERN →');gstate='result';}else showSnailRace();}
 
 // ══ Snail Race ══
-function showSnailRace(){const pool=SNAIL_DATA[lvl]||SNAIL_DATA[1],pick=pool[Math.floor(Math.random()*pool.length)];snailWinProb=Math.max(.05,Math.min(.95,pick.prob+(Math.random()-.5)*.06));$$('snail-code').textContent=pick.code;$$('snail-prob-reveal').style.display='none';$$('snail-result-box').style.display='none';const mb=Math.max(5,Math.min(gold,200));const sl=$$('snail-bet');sl.max=mb;sl.value=Math.min(10,Math.max(5,Math.floor(gold*.2/5)*5));snailBetAmt=parseInt(sl.value);$$('snail-bet-lbl').textContent=snailBetAmt;$$('snail-race-btn').disabled=false;$$('ov-tavern').style.display='none';$$('ov-snail').style.display='block';snailAngle=0;const sz=Math.min(160,Math.floor(Math.min(W,H)*.22));const sc=$$('snail-cv');sc.width=sz;sc.height=sz;drawWheel();gstate='snailrace';}
+function showSnailRace(){
+  const pool=SNAIL_DATA[lvl]||SNAIL_DATA[1];
+  const pick=pool[Math.floor(Math.random()*pool.length)];
+  snailWinProb=Math.max(.05,Math.min(.95,pick.prob+(Math.random()-.5)*.06));
+  $$('snail-code').textContent=pick.code;
+  $$('snail-result-box').style.display='none';
+  // Build two probability options: correct + decoy
+  const correct=Math.round(snailWinProb*100);
+  let decoy;
+  if(lvl===1){decoy=correct<50?correct+Math.floor(Math.random()*20+30):correct-Math.floor(Math.random()*20+30);}
+  else if(lvl===2){decoy=correct<50?correct+Math.floor(Math.random()*15+18):correct-Math.floor(Math.random()*15+18);}
+  else{decoy=correct<50?correct+Math.floor(Math.random()*10+10):correct-Math.floor(Math.random()*10+10);}
+  decoy=Math.max(5,Math.min(95,decoy));
+  // Shuffle which button is correct
+  snailCorrectOpt=Math.random()<.5?0:1;
+  const opts=snailCorrectOpt===0?[correct,decoy]:[decoy,correct];
+  const container=$$('snail-opts');container.innerHTML='';
+  opts.forEach((pct,i)=>{
+    const btn=document.createElement('button');btn.className='snail-prob-btn';
+    btn.textContent=pct+'%';
+    btn.onclick=()=>pickSnailProb(i);
+    container.appendChild(btn);
+  });
+  const mb=Math.max(5,Math.min(gold,200));
+  const sl=$$('snail-bet');sl.max=mb;sl.value=Math.min(10,Math.max(5,Math.floor(gold*.2/5)*5));
+  snailBetAmt=parseInt(sl.value);$$('snail-bet-lbl').textContent=snailBetAmt;
+  $$('ov-tavern').style.display='none';$$('ov-snail').style.display='block';
+  gstate='snailrace';
+}
 function updateSnailBet(v){snailBetAmt=parseInt(v);$$('snail-bet-lbl').textContent=snailBetAmt;}
-function drawWheel(){const sc=$$('snail-cv');if(!sc)return;const sctx=sc.getContext('2d'),sz=sc.width,cx=sz/2,cy=sz/2,r=sz*.42;sctx.clearRect(0,0,sz,sz);const wa=snailWinProb*2*Math.PI;sctx.save();sctx.translate(cx,cy);sctx.rotate(snailAngle);sctx.beginPath();sctx.moveTo(0,0);sctx.arc(0,0,r,0,wa);sctx.closePath();sctx.fillStyle='#c02020';sctx.fill();sctx.beginPath();sctx.moveTo(0,0);sctx.arc(0,0,r,wa,2*Math.PI);sctx.closePath();sctx.fillStyle='#111';sctx.fill();sctx.strokeStyle='rgba(255,255,255,.3)';sctx.lineWidth=1.5;sctx.beginPath();sctx.moveTo(0,0);sctx.lineTo(0,-r);sctx.stroke();sctx.save();sctx.rotate(wa);sctx.beginPath();sctx.moveTo(0,0);sctx.lineTo(0,-r);sctx.stroke();sctx.restore();sctx.beginPath();sctx.arc(0,0,r,0,2*Math.PI);sctx.strokeStyle='rgba(200,180,100,.6)';sctx.lineWidth=2;sctx.stroke();const fsz=Math.max(8,r*.18);sctx.font=`bold ${fsz}px monospace`;sctx.textAlign='center';sctx.textBaseline='middle';sctx.fillStyle='rgba(255,180,180,.9)';sctx.fillText('WIN',r*.55*Math.cos(wa/2-Math.PI/2),r*.55*Math.sin(wa/2-Math.PI/2));const mb=wa+(2*Math.PI-wa)/2;sctx.fillStyle='rgba(160,160,160,.7)';sctx.fillText('LOSE',r*.55*Math.cos(mb-Math.PI/2),r*.55*Math.sin(mb-Math.PI/2));sctx.restore();sctx.beginPath();sctx.arc(cx,cy,5,0,2*Math.PI);sctx.fillStyle='#888';sctx.fill();sctx.fillStyle='#fff';sctx.strokeStyle='#888';sctx.lineWidth=1;sctx.beginPath();sctx.moveTo(cx,cy-r-1);sctx.lineTo(cx-6,cy-r-14);sctx.lineTo(cx+6,cy-r-14);sctx.closePath();sctx.fill();sctx.stroke();}
-function doSnailRace(){if(snailSpinning||gold<5)return;snailBetAmt=Math.min(snailBetAmt,gold);snailSpinning=true;$$('snail-race-btn').disabled=true;$$('snail-result-box').style.display='none';const won=Math.random()<snailWinProb,wa=snailWinProb*2*Math.PI;const lt=won?Math.random()*wa:wa+Math.random()*(2*Math.PI-wa);const sp=6+Math.floor(Math.random()*4);const ta=snailAngle+(sp*2*Math.PI+(0-lt-snailAngle%(2*Math.PI)+2*Math.PI)%(2*Math.PI));const dur=2800,st=snailAngle,t0=performance.now();function fr(now){const t=Math.min((now-t0)/dur,1),e=1-Math.pow(1-t,4);snailAngle=st+(ta-st)*e;drawWheel();if(t<1)requestAnimationFrame(fr);else{snailSpinning=false;finishRace(won);}}requestAnimationFrame(fr);}
-function finishRace(won){const d=won?snailBetAmt:-snailBetAmt;gold=Math.max(0,gold+d);updHUD();if(won)showGoldBlink('+'+snailBetAmt+'g');else showDmgBlink('−'+snailBetAmt+'g');$$('snail-prob-reveal').style.display='block';$$('snail-win-pct').textContent=Math.round(snailWinProb*100);const rb=$$('snail-result-box');rb.style.display='block';rb.style.cssText+=`border-left:3px solid ${won?'#3a9050':'#b03030'};color:${won?'#4ab060':'#cc4444'};`;rb.textContent=won?'🐌 Your snail WON!\n+'+snailBetAmt+' gold!':'🐌 Your snail LOST.\n−'+snailBetAmt+' gold.';showRes(won?'Snail WIN! +'+snailBetAmt+'g':'Snail LOSS. −'+snailBetAmt+'g',won?'#3a9050':'#b03030',won?'#4ab060':'#cc4444','LEAVE TAVERN →');gstate='result';}
+function pickSnailProb(idx){
+  // Disable both buttons immediately
+  const btns=$$('snail-opts').querySelectorAll('.snail-prob-btn');
+  btns.forEach(b=>{b.disabled=true;b.onclick=null;});
+  const won=(idx===snailCorrectOpt);
+  const d=won?snailBetAmt:-snailBetAmt;
+  gold=Math.max(0,gold+d);updHUD();
+  if(won){
+    btns[idx].style.borderColor='#3a9050';btns[idx].style.color='#4ab060';
+    showGoldBlink('+'+snailBetAmt+'g');
+  } else {
+    btns[idx].style.borderColor='#b03030';btns[idx].style.color='#cc4444';
+    btns[snailCorrectOpt].style.borderColor='#3a9050';btns[snailCorrectOpt].style.color='#4ab060';
+    showDmgBlink('−'+snailBetAmt+'g');
+  }
+  const rb=$$('snail-result-box');rb.style.display='block';
+  rb.style.cssText+=`border-left:3px solid ${won?'#3a9050':'#b03030'};color:${won?'#4ab060':'#cc4444'};`;
+  rb.textContent=won?'🐌 Correct probability!\n+'+snailBetAmt+' gold!':'🐌 Wrong probability!\n−'+snailBetAmt+' gold.\nCorrect: '+Math.round(snailWinProb*100)+'%';
+  showRes(won?'Correct! +'+snailBetAmt+'g':'Wrong. −'+snailBetAmt+'g',won?'#3a9050':'#b03030',won?'#4ab060':'#cc4444','LEAVE TAVERN →');
+  gstate='result';
+}
 
 // ══ Boss ══
 function openBoss(){const bc=BOSS_CONFIGS[lvl];bossHp=bc.hp;bossMaxHp=bc.hp;bossQIdx=0;const img=$$('boss-img');if(bc.img){img.src=bc.img;img.style.display='block';img.style.animation=bc.anim+' 2.4s ease-in-out infinite';}else img.style.display='none';$$('boss-name-lbl').textContent=bc.name;$$('boss-info').textContent=bc.info;$$('boss-attack-lbl').textContent='';setBossSegs(bossMaxHp);$$('boss-panel').style.display='block';updBossHP();openBossQ(BOSS_QS[lvl]);}
@@ -766,7 +892,7 @@ function pickRelic(id){activeRelics.add(id);if(id==='beermug'){maxHP+=20;hp=Math
 function showWin(){gstate='win';const rank=gold>=200?'S — R Master':gold>=130?'A — R Expert':gold>=70?'B — Solid run':'C — Keep studying!';const stats=playerName+'\nHP: '+Math.max(0,hp)+'/'+maxHP+'\nGold: '+gold+'\nRelics: '+(activeRelics.size||'none')+'\nRank: '+rank;if(lvl<3){$$('win-title').textContent=lvl===1?'SOUR RON DEFEATED!':'THE KRACKER FALLS!';$$('win-sub').textContent='The journey continues...';$$('win-txt').textContent=stats+'\n\nGold + relics carry over!';$$('win-btn1').style.display='inline-block';$$('win-btn1').textContent='CONTINUE  →  LEVEL '+(lvl+1)+'  ↑';}else{$$('win-title').textContent='R MASTER';$$('win-sub').textContent='DR. AKE DEFEATED.';$$('win-txt').textContent=stats;$$('win-btn1').style.display='none';}$$('win').style.display='flex';}
 function ascendNext(){lvl++;mapNodes=generateMap();visited=new Set([0]);curId=0;bossHp=0;bossQIdx=0;updHUD();$$('win').style.display='none';gstate='map';}
 function startGame(){const inp=$$('player-name');playerName=(inp&&inp.value.trim())||'Adventurer';$$('name-row').textContent=playerName;$$('go-name').textContent=playerName+' fell in battle...';$$('start-screen').style.display='none';mapNodes=generateMap();visited=new Set([0]);curId=0;gstate='map';}
-function goToStart(){lvl=1;hp=80;maxHP=80;gold=0;inv={elim:0,hint:0};activeRelics=new Set();upgradedRelics=new Set();relicPool=['sprite','coin','wronghat','beermug'];bossHp=0;bossQIdx=0;studyBonus=false;fairyHintPending=false;snailAngle=0;snailSpinning=false;activeId=null;elimIdx=-1;hintShown=false;activeQ=null;updHUD();['win','go'].forEach(id=>$$(id).style.display='none');$$('ov').style.display='none';$$('relic-overlay').style.display='none';gstate='start';const ss=$$('start-screen');ss.style.display='flex';const inp=$$('player-name');if(inp){inp.value='';setTimeout(()=>inp.focus(),300);}}
+function goToStart(){lvl=1;hp=80;maxHP=80;gold=0;inv={elim:0,hint:0};activeRelics=new Set();upgradedRelics=new Set();relicPool=['sprite','coin','wronghat','beermug'];bossHp=0;bossQIdx=0;studyBonus=false;fairyHintPending=false;activeId=null;elimIdx=-1;hintShown=false;activeQ=null;updHUD();['win','go'].forEach(id=>$$(id).style.display='none');$$('ov').style.display='none';$$('relic-overlay').style.display='none';gstate='start';const ss=$$('start-screen');ss.style.display='flex';const inp=$$('player-name');if(inp){inp.value='';setTimeout(()=>inp.focus(),300);}}
 
 $$('ov-inp').addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Enter')submitTxt();});
 $$('player-name').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();startGame();}});
