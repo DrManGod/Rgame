@@ -349,6 +349,7 @@ body{display:flex;align-items:center;justify-content:center;}
     <div style="display:flex;gap:8px;">
       <button id="item-elim" class="item-btn" onclick="useElim()"></button>
       <button id="item-hint-btn" class="item-btn" onclick="useHint()"></button>
+      <button id="item-sample" class="item-btn" onclick="useSample()" style="border:1px solid #40a0c0;color:#40a0c0;display:none;">🎲 SWAP</button>
     </div>
   </div>
   <div id="ov-hint-box"></div>
@@ -451,9 +452,9 @@ let curId=0,visited=new Set([0]),hp=80,maxHP=80,gold=0,inv={elim:0,hint:0};
 let gstate='start',tick=0,activeId=null;
 let elimIdx=-1,hintShown=false,activeQ=null,lvl=1;
 let bossHp=3,bossMaxHp=3,bossQIdx=0,usedBossQs=new Set();
-let activeRelics=new Set(),upgradedRelics=new Set(),relicPool=['sprite','coin','wronghat','beermug'];
+let activeRelics=new Set(),upgradedRelics=new Set(),relicPool=['sprite','coin','wronghat','beermug','which','trycatch','sample','cumsum','sdrel','glimpse','rep'];
 let snailWinProb=.30,snailBetAmt=10,snailCorrectOpt=0;
-let studyBonus=false,fairyHintPending=false;
+let studyBonus=false,fairyHintPending=false;let tryCatchUsed=false,sampleUsed=false,repUsed=false,nodesThisLvl=0,prismFailed=false;
 let mapNodes=[],nodeMap=new Map();
 const $$=id=>document.getElementById(id);
 
@@ -464,7 +465,9 @@ function calcGold(type){
   let base=type==='easy'?r(5,15):type==='medium'?r(12,25):type==='hard'?r(17,35):type==='boss'?r(18,28):0;
   base=Math.round(base*lvlMult());
   if(activeRelics.has('coin'))base=Math.round(base*(1+(upgradedRelics.has('coin')?0.22:0.10)));
-  return base;
+  if(activeRelics.has('cumsum'))base+=nodesThisLvl*2;
+  if(activeRelics.has('sdrel')){const variance=(Math.random()-.5)*0.8;base=Math.round(base*(1.20+variance));}
+  return Math.max(0,base);
 }
 function calcDmg(type){
   if(type==='souron')return 20+Math.floor(Math.random()*16);
@@ -479,6 +482,13 @@ const RELICS={
   coin:{icon:'🪙',name:'>coin',desc:'All gold earnings +10%.',color:'#e0c040'},
   wronghat:{icon:'🎩',name:'2wrongs<-right-hat',desc:'Wrong answer: 33% chance to chain-eliminate another wrong option.',color:'#c060c0'},
   beermug:{icon:'🍺',name:'Beer Mug',desc:'+20 max HP permanently. +20 HP bonus when visiting the tavern.',color:'#d08020'},
+  which:{icon:'📌',name:'which()',desc:'Wrong answer: 50% chance the correct answer flashes green for 1s.',color:'#e08040'},
+  trycatch:{icon:'🔁',name:'tryCatch',desc:'Once per level: survive a killing blow at 1 HP instead of dying.',color:'#c04040'},
+  sample:{icon:'🎲',name:'sample()',desc:'Once per battle: swap to a different question from the same pool.',color:'#40a0c0'},
+  cumsum:{icon:'🧮',name:'cumsum()',desc:'+2 gold bonus per node visited this level, stacked on every reward.',color:'#70b840'},
+  sdrel:{icon:'💹',name:'sd()',desc:'Gold rewards ±40% variance but expected value is 20% higher.',color:'#e0a030'},
+  glimpse:{icon:'🗺️',name:'glimpse()',desc:'Node labels on the map show the event type of next-row nodes.',color:'#50c8c8'},
+  rep:{icon:'♻️',name:'rep()',desc:'First Prismatic Statue per level can be retried once if wrong.',color:'#a060e0'},
 };
 function relicHUD(){$$('relic-row').textContent=Array.from(activeRelics).map(id=>RELICS[id]?.icon||'').join(' ')+(upgradedRelics.size?' ✦':'');}
 function spriteChance(){return upgradedRelics.has('sprite')?0.66:0.33;}
@@ -530,7 +540,13 @@ function openColorGuess(){
         cBtn.style.borderColor='#4ab060';cBtn.style.borderWidth='4px';
         cBtn.style.boxShadow='0 0 28px 8px rgba(74,176,96,.95),inset 0 0 0 3px rgba(255,255,255,.6)';
         cBtn.style.transform='scale(1.18)';cBtn.style.opacity='1';cBtn.style.zIndex='10';
-        showRes('Wrong!\nYou picked: '+opts[i][0]+'\nCorrect:    '+ansName+'.','#b03030','#cc4444','CONTINUE →');
+        prismFailed=true;
+        if(activeRelics.has('rep')&&!repUsed){
+          showRes('Wrong!\nYou picked: '+opts[i][0]+'\nCorrect:    '+ansName+'.\n\n♻️ rep() relic — RETRY once!','#b03030','#cc4444','RETRY →');
+          $$('ov-cont').onclick=function(){repUsed=true;$$('ov-cont').onclick=()=>advance();openColorGuess();};
+        } else {
+          showRes('Wrong!\nYou picked: '+opts[i][0]+'\nCorrect:    '+ansName+'.','#b03030','#cc4444','CONTINUE →');
+        }
       }
       gstate='result';
     };
@@ -1143,7 +1159,7 @@ function shuffleQ(q){if(q.type!=='mcq')return{...q};const ord=q.ch.map((_,i)=>i)
 
 // ══ Map Generation ══
 // Q_POOLS replaced by QB_POOL (auto-built from QB)
-const EVENT_IDS=['altar','anvil','fairy','chest','campfire','scholar','flower'];
+const EVENT_IDS=['altar','anvil','fairy','chest','campfire','scholar','flower','lockedchest','library','rstudio'];
 function generateMap(){
   const rows=[];let nid=0;
   const counts=[1];
@@ -1236,7 +1252,7 @@ function generateMap(){
       if(cands.length>0){const p=cands[Math.floor(Math.random()*cands.length)];p.type='event';p.qid=null;p.eventType='colorguess';}
     }
     // Distribute remaining event nodes: each gets a unique event type (no duplicates per level)
-    const otherTypes=['altar','anvil','fairy','chest','campfire','scholar','flower'];
+    const otherTypes=['altar','anvil','fairy','chest','campfire','scholar','flower','lockedchest','library','rstudio'];
     const remaining=rows.flat().filter(n=>n.type==='event'&&n.eventType!=='colorguess');
     // Shuffle otherTypes and assign cyclically (no two of the same in a single run)
     const shuffled=[...otherTypes].sort(()=>Math.random()-.5);
@@ -1281,7 +1297,10 @@ function setBossSegs(c){const s=$$('boss-hp-segs');s.innerHTML='';for(let i=0;i<
 // ══ Floaters ══
 function showDmgBlink(txt){const e=$$('dmg-blink');e.className='';e.style.display='block';e.textContent=txt;void e.offsetWidth;e.className='dmg-anim';clearTimeout(e._t);e._t=setTimeout(()=>{e.style.display='none';e.className='';},1050);}
 function showGoldBlink(txt){const e=$$('gb');e.className='';e.style.display='block';e.textContent=txt;void e.offsetWidth;e.className='gold-anim';clearTimeout(e._t);e._t=setTimeout(()=>{e.style.display='none';e.className='';},1150);}
-function applyDamage(type){const d=calcDmg(type);hp=Math.max(0,hp-d);updHUD();showDmgBlink('−'+d+' HP');if(hp<=0)setTimeout(()=>{$$('ov').style.display='none';$$('go').style.display='flex';gstate='gameover';},900);return d;}
+function applyDamage(type){const d=calcDmg(type);hp=Math.max(0,hp-d);
+  // tryCatch relic: survive killing blow once per level
+  if(hp<=0&&activeRelics.has('trycatch')&&!tryCatchUsed){hp=1;tryCatchUsed=true;updHUD();showDmgBlink('🔁 CAUGHT!');return d;}
+  updHUD();showDmgBlink('−'+d+' HP');if(hp<=0)setTimeout(()=>{$$('ov').style.display='none';$$('go').style.display='flex';gstate='gameover';},900);return d;}
 
 // ══ Panel helpers ══
 function setBadge(txt,col){const b=$$('ov-badge');b.textContent=txt;b.style.borderColor=col;b.style.color=col;$$('ov').style.borderColor=col;}
@@ -1297,6 +1316,8 @@ function updItems(){
   eb.style.display=isMCQ?'block':'none';
   const ed=inv.elim===0||elimIdx>=0;eb.disabled=ed;eb.style.opacity=ed?'0.3':'1';eb.style.cursor=ed?'default':'pointer';eb.textContent='⬡ SHIELD ('+inv.elim+')';
   const hd=inv.hint===0||hintShown;hb.disabled=hd;hb.style.opacity=hd?'0.3':'1';hb.style.cursor=hd?'default':'pointer';hb.textContent='⬡ HINT ('+inv.hint+')';
+  const sb=$$('item-sample');
+  if(sb){const sampleOk=activeRelics.has('sample')&&!sampleUsed&&isMCQ&&!(getNode(activeId)?.type==='boss');sb.style.display=sampleOk?'inline-block':'none';sb.disabled=!sampleOk;sb.style.opacity=sampleOk?'1':'0.3';}
 }
 function autoHint(q){
   if(hintShown||!q?.hint)return;
@@ -1399,6 +1420,12 @@ function drawNodes(){
       if(av&&!dn){ctx.shadowBlur=10+pulse*18;ctx.shadowColor=col.glow;hexP(x,y,R+9+pulse*5);ctx.strokeStyle=`rgba(136,96,216,${.22+pulse*.5})`;ctx.lineWidth=2;ctx.stroke();ctx.shadowBlur=0;}
       ctx.shadowBlur=av||cur?10:0;ctx.shadowColor=col.glow;hexP(x,y,R);const qg=ctx.createRadialGradient(x,y-R*.2,0,x,y,R);qg.addColorStop(0,dn&&!cur?'#1a1028':'#2a1248');qg.addColorStop(1,dn&&!cur?'#100a20':'#180830');ctx.fillStyle=qg;ctx.fill();ctx.strokeStyle=dn&&!cur?'rgba(80,50,130,.35)':cur?'#fff':av?col.stroke:'rgba(60,40,100,.4)';ctx.lineWidth=cur?2.5:1.5;ctx.stroke();ctx.shadowBlur=0;
       const qs=1+Math.sin(tick*.08+n.id)*.06;ctx.save();ctx.translate(x,y);ctx.scale(qs,qs);ctx.fillStyle=dn&&!cur?'rgba(120,80,180,.4)':'rgba(210,160,255,.95)';ctx.font=`bold ${Math.max(12,R*.62)}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('?',0,0);ctx.restore();
+      // glimpse() relic: show event sub-icon for available next nodes
+      if(activeRelics.has('glimpse')&&av&&!dn&&n.eventType){
+        const evIc={altar:'⛩',anvil:'⚒',fairy:'🧚',chest:'📦',campfire:'🔥',scholar:'🧙',flower:'🌸',lockedchest:'🔒',library:'📚',rstudio:'💻',colorguess:'✦'};
+        ctx.font=`${Math.max(8,R*.38)}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillStyle='rgba(200,160,255,.85)';ctx.fillText(evIc[n.eventType]||'?',x,y+R*.9);
+      }
     } else if(n.type==='shop'){
       // Shop: hexagon like all other nodes
       if(av&&!dn){ctx.shadowBlur=8+pulse*14;ctx.shadowColor=col.glow;hexP(x,y,R+8+pulse*4);ctx.strokeStyle=`rgba(160,100,230,${.2+pulse*.4})`;ctx.lineWidth=1.5;ctx.stroke();ctx.shadowBlur=0;}
@@ -1512,6 +1539,17 @@ function openEvent(n){
     anvil:{title:'⚒️ THE SMITH',flavor:'A weathered blacksmith has set up a forge by the roadside. The smell of hot iron fills the air.',choices:[{icon:'⚒️',label:'UPGRADE RELIC (25g)',desc:getUpDesc2(),fn:anvilUpgrade},{icon:'🚶',label:'PASS BY',desc:'',fn:evLeave}]},
     colorguess:{title:'✦ PRISMATIC STATUE',flavor:'',choices:[],_custom:true},
     flower:{title:'🌸 MYSTIC FLOWER',flavor:'A flower of unknown color grows at the crossroads. Legend says guessing its true color brings fortune.',choices:flowerChoices()},
+    lockedchest:{title:'🔒 LOCKED CHEST',flavor:'A heavy iron-bound chest sits padlocked on the path. Something valuable rattles inside — but it will cost you to find out.',choices:[
+      {icon:'💰',label:'PAY 20g TO UNLOCK',desc:'Spend 20g — 60% chance +60g, 40% chance nothing',fn:payChest},
+      {icon:'🔑',label:'PICK THE LOCK',desc:'Free attempt — 30% chance +40g, 70% chance −15 HP (trapped!)',fn:pickLock},
+      {icon:'🚶',label:'LEAVE IT',desc:'',fn:evLeave},
+    ]},
+    library:{title:'📚 THE LIBRARY',flavor:'A dusty travelling library cart sits at the crossroads. The librarian peers at you over her spectacles.',choices:[
+      {icon:'📖',label:'STUDY HARD',desc:'Next two battles: hint auto-revealed',fn:libraryStudy},
+      {icon:'💸',label:'BUY A MANUAL (10g)',desc:'Spend 10g → +1 hint scroll',fn:libraryBuy},
+      {icon:'🚶',label:'BROWSE & LEAVE',desc:'',fn:evLeave},
+    ]},
+    rstudio:{title:'💻 R CONSOLE',flavor:'A glowing terminal hums on a mossy log. "Evaluate this expression and I will reward you," it whispers.',choices:[{icon:'⌨️',label:'EVALUATE',desc:'Answer a quick R question for gold',fn:rstudioQ},{icon:'🚶',label:'IGNORE IT',desc:'',fn:evLeave}]},
     scholar:{title:'🧙 WANDERING SCHOLAR',flavor:"An eccentric academic has set up shop in your path.",choices:[{icon:'🛡️',label:'BUY SHIELD',desc:'15g → +1 shield (have: '+inv.elim+')',fn:()=>schBuy('elim')},{icon:'📜',label:'BUY HINT',desc:'10g → +1 hint (have: '+inv.hint+')',fn:()=>schBuy('hint')},{icon:'🚶',label:'LEAVE',desc:'',fn:evLeave}]},
   };
   if(n.eventType==='colorguess'){openColorGuess();return;}
@@ -1553,6 +1591,39 @@ function guessFlower(correct){
   }
   gstate='result';
 }
+function payChest(){
+  if(gold<20){showRes('Not enough gold!\nThe chest stays locked.','#b03030','#cc4444','CONTINUE →');gstate='result';return;}
+  gold-=20;updHUD();
+  if(Math.random()<.60){gold+=60;updHUD();showGoldBlink('+60g');showRes('The chest opens!\n\n+60 gold!\n(Net gain: +40g)','#3a9050','#4ab060','CONTINUE →');}
+  else{showRes('The chest is empty.\n\n−20 gold spent.\nNothing inside but dust.','#664466','#aa88aa','CONTINUE →');}
+  gstate='result';
+}
+function pickLock(){
+  if(Math.random()<.30){gold+=40;updHUD();showGoldBlink('+40g');showRes('Click! The lock opens!\n\n+40 gold!','#3a9050','#4ab060','CONTINUE →');}
+  else{hp=Math.max(0,hp-15);updHUD();showDmgBlink('−15 HP');showRes('SNAP! A needle trap!\n\n−15 HP!\nBetter bring a key next time.','#b03030','#cc4444','CONTINUE →');}
+  gstate='result';
+}
+function libraryStudy(){studyBonus=true;fairyHintPending=true;showRes('You study intensely.\n\n📖 Hint auto-revealed\nfor your next TWO battles!','#60d0a0','#80ffcc','CONTINUE →');gstate='result';}
+function libraryBuy(){
+  if(gold<10){showRes('Not enough gold for a manual!','#b03030','#cc4444','CONTINUE →');gstate='result';return;}
+  gold-=10;inv.hint++;updHUD();showRes('You purchase a pocket R manual.\n\n−10g  ·  +1 Hint Scroll','#3a9050','#4ab060','CONTINUE →');gstate='result';
+}
+function rstudioQ(){
+  // Quick MCQ drawn from QB (easy question from current level)
+  const pool=getPool(lvl,'easy');
+  if(!pool.length){evLeave();return;}
+  const qid=pool[Math.floor(Math.random()*pool.length)];
+  const q=shuffleQ(QB[qid]);activeQ=q;elimIdx=-1;hintShown=false;
+  setBadge('💻 R CONSOLE','#8860d8');
+  $$('ov-event').style.display='none';
+  $$('ov-q').textContent=q.q;
+  buildMCQ(q);
+  $$('ov').style.borderColor='#8860d8';
+  // Override correct/wrong to give gold reward
+  window._rstudioMode=true;
+  gstate='question';updItems();
+}
+
 function altarHeal(){hp=Math.min(maxHP,hp+25);updHUD();showGoldBlink('+25 HP');showRes('You prayed at the altar.\n\n+25 HP restored!','#2858c8','#6090e0','CONTINUE →');gstate='result';}
 function altarUpgrade(){
   const up=Array.from(activeRelics).filter(id=>!upgradedRelics.has(id));
@@ -1638,6 +1709,11 @@ function answerMCQ(idx){
     btns[idx].style.opacity='.1';btns[idx].style.textDecoration='line-through';btns[idx].style.cursor='default';btns[idx].onclick=null;
     if(isBoss)$$('boss-attack-lbl').textContent=BOSS_CONFIGS[lvl].atk;
     if(activeRelics.has('wronghat')&&Math.random()<wronghatChance()){const alive=Array.from(btns).map((b,i)=>i).filter(i=>i!==q.ok&&i!==idx&&btns[i].onclick!==null);if(alive.length){const ei=alive[Math.floor(Math.random()*alive.length)];btns[ei].style.opacity='.08';btns[ei].style.textDecoration='line-through';btns[ei].onclick=null;btns[ei].style.cursor='default';}}
+    // which() relic: 50% flash of correct answer
+    if(activeRelics.has('which')&&Math.random()<.5&&activeQ.type==='mcq'){
+      btns[activeQ.ok].style.borderColor='#4ab060';btns[activeQ.ok].style.color='#4ab060';btns[activeQ.ok].style.background='rgba(30,80,40,.5)';
+      setTimeout(()=>{if(btns[activeQ.ok]){btns[activeQ.ok].style.borderColor='';btns[activeQ.ok].style.color='';btns[activeQ.ok].style.background='';}},1000);
+    }
     applyDamage(isBoss?BOSS_CONFIGS[lvl].dmgType:getNode(activeId).type);return;
   }
   btns.forEach(b=>{b.onclick=null;b.style.cursor='default';});btns[idx].style.borderColor='#3a9050';btns[idx].style.color='#4ab060';
@@ -1645,7 +1721,9 @@ function answerMCQ(idx){
   isBoss?correctBoss(q):correctReg(q);
 }
 function submitTxt(){if(!activeQ)return;const raw=$$('ov-inp').value.trim().toLowerCase().replace(/\s+/g,'');const ok=activeQ.ans.some(a=>a.toLowerCase().replace(/\s+/g,'')===raw);if(!ok){const isBoss=getNode(activeId)?.type==='boss';applyDamage(isBoss?BOSS_CONFIGS[lvl].dmgType:getNode(activeId).type);$$('ov-inp').value='';const err=$$('txt-err');err.textContent='✗ Wrong — try again!';err.style.display='block';setTimeout(()=>err.style.display='none',1400);return;}$$('ov-txt').style.display='none';getNode(activeId)?.type==='boss'?correctBoss(activeQ):correctReg(activeQ);}
-function correctReg(q){const e=calcGold(getNode(activeId).type);gold+=e;updHUD();showGoldBlink('+'+e+' gold!');showRes(q.ex+'\n\n+'+e+' gold!','#3a9050','#4ab060','CONTINUE →');gstate='result';}
+function correctReg(q){
+  if(window._rstudioMode){window._rstudioMode=false;const e=25;gold+=e;updHUD();showGoldBlink('+'+e+'g');showRes(q.ex+'\n\n+'+e+' gold from the console!','#3a9050','#4ab060','CONTINUE →');gstate='result';return;}
+  const e=calcGold(getNode(activeId).type);gold+=e;updHUD();showGoldBlink('+'+e+' gold!');showRes(q.ex+'\n\n+'+e+' gold!','#3a9050','#4ab060','CONTINUE →');gstate='result';}
 function correctBoss(q){bossHp--;updBossHP();const bn=lvl===1?'Sour Ron':lvl===2?'Kracker':'Dr. Ake',isFinal=bossHp===0;const suf=bossHp>1?'\n\n'+bn+' reels!':bossHp===1?'\n\nAlmost! ONE MORE HIT!':'\n\n⚔  FINAL BLOW LANDED!';showRes(q.ex+suf,'#3a9050','#4ab060',isFinal?'CLAIM VICTORY ★':'NEXT STRIKE →');gstate='result';if(!isFinal){clearTimeout(correctBoss._t);correctBoss._t=setTimeout(()=>{if(gstate==='result')advance();},1800);}}
 function showRes(txt,bc,tc,btn){const r=$$('ov-res'),rt=$$('ov-res-txt');r.style.display='block';r.style.borderColor=bc;rt.style.color=tc;rt.textContent=txt;$$('ov-cont').textContent=btn;}
 
@@ -1654,11 +1732,24 @@ function openShop(n){setBadge((lvl>1?'LVL'+lvl+'·':'')+'SHOP·WP'+(n.row||1),'#
 function updShopBtns(){const eb=$$('shop-buy-elim'),hb=$$('shop-buy-hint');eb.disabled=gold<15;eb.style.opacity=gold<15?'0.3':'1';hb.disabled=gold<10;hb.style.opacity=gold<10?'0.3':'1';}
 function buyItem(type){if(type==='elim'&&gold>=15){gold-=15;inv.elim++;}else if(type==='hint'&&gold>=10){gold-=10;inv.hint++;}else return;updHUD();$$('shop-gold').textContent=gold;$$('shop-elim-n').textContent=inv.elim;$$('shop-hint-n').textContent=inv.hint;updShopBtns();}
 function leaveShop(){visitLeave();}
+function useSample(){
+  if(!activeRelics.has('sample')||sampleUsed||!activeQ)return;
+  const n=getNode(activeId);if(!n||n.type==='boss')return;
+  const pool=getPool(lvl,n.type).filter(id=>!usedQids.has(id)&&id!==n.qid);
+  if(!pool.length)return;
+  sampleUsed=true;
+  const newQid=pool[Math.floor(Math.random()*pool.length)];
+  usedQids.add(newQid);n.qid=newQid;
+  // Reopen question
+  $$('ov-mcq').innerHTML='';hideAll();elimIdx=-1;hintShown=false;
+  openQuestion(n);
+}
+
 function useElim(){if(inv.elim===0||elimIdx>=0||!activeQ||activeQ.type!=='mcq')return;const btns=$$('ov-mcq').querySelectorAll('.mcq-btn');const w=Array.from(btns).map((b,i)=>i).filter(i=>i!==activeQ.ok&&btns[i].onclick!==null);if(!w.length)return;elimIdx=w[Math.floor(Math.random()*w.length)];inv.elim--;btns[elimIdx].style.opacity='.1';btns[elimIdx].style.textDecoration='line-through';btns[elimIdx].onclick=null;btns[elimIdx].style.cursor='default';updHUD();updItems();}
 function useHint(){if(inv.hint===0||hintShown||!activeQ)return;inv.hint--;hintShown=true;$$('ov-hint-box').textContent='Hint: '+activeQ.hint;$$('ov-hint-box').style.display='block';updHUD();updItems();}
 
 // ══ Advance ══
-function visitLeave(){visited.add(activeId);curId=activeId;activeId=null;$$('ov').style.display='none';if(hp<=0){$$('go').style.display='flex';gstate='gameover';return;}gstate='map';}
+function visitLeave(){visited.add(activeId);curId=activeId;nodesThisLvl++;activeId=null;$$('ov').style.display='none';if(hp<=0){$$('go').style.display='flex';gstate='gameover';return;}gstate='map';}
 function advance(){
   clearTimeout(correctBoss._t);
   const isBoss=getNode(activeId)?.type==='boss';
@@ -1674,9 +1765,9 @@ function pickRelic(id){activeRelics.add(id);if(id==='beermug'){maxHP+=20;hp=Math
 
 // ══ Win/Reset ══
 function showWin(){gstate='win';const rank=gold>=200?'S — R Master':gold>=130?'A — R Expert':gold>=70?'B — Solid run':'C — Keep studying!';const stats=playerName+'\nHP: '+Math.max(0,hp)+'/'+maxHP+'\nGold: '+gold+'\nRelics: '+(activeRelics.size||'none')+'\nRank: '+rank;if(lvl<3){$$('win-title').textContent=lvl===1?'SOUR RON DEFEATED!':'THE KRACKER FALLS!';$$('win-sub').textContent='The journey continues...';$$('win-txt').textContent=stats+'\n\nGold + relics carry over!';$$('win-retire').style.display='inline-block';$$('win-btn1').style.display='inline-block';$$('win-btn1').textContent='CONTINUE  →  LEVEL '+(lvl+1)+'  ↑';}else{const d2=new Date();saveScore({name:playerName,gold,level:3,date:d2.getDate()+'/'+(d2.getMonth()+1)+'/'+d2.getFullYear()});$$('win-title').textContent='R MASTER';$$('win-sub').textContent='DR. AKE DEFEATED.';$$('win-txt').textContent=stats;$$('win-btn1').style.display='none';$$('win-retire').style.display='none';}$$('win').style.display='flex';}
-function ascendNext(){lvl++;usedQids=new Set();mapNodes=generateMap();visited=new Set([0]);curId=0;bossHp=0;bossQIdx=0;updHUD();$$('win').style.display='none';gstate='map';}
-function startGame(){const inp=$$('player-name');playerName=(inp&&inp.value.trim())||'Adventurer';$$('name-row').textContent=playerName;$$('go-name').textContent=playerName+' fell in battle...';usedQids=new Set();$$('start-screen').style.display='none';mapNodes=generateMap();visited=new Set([0]);curId=0;gstate='map';}
-function goToStart(){lvl=1;hp=80;maxHP=80;gold=0;inv={elim:0,hint:0};activeRelics=new Set();upgradedRelics=new Set();relicPool=['sprite','coin','wronghat','beermug'];bossHp=0;bossQIdx=0;usedQids=new Set();studyBonus=false;fairyHintPending=false;activeId=null;elimIdx=-1;hintShown=false;activeQ=null;updHUD();['win','go'].forEach(id=>$$(id).style.display='none');$$('ov').style.display='none';$$('relic-overlay').style.display='none';const wr=$$('win-retire');if(wr)wr.style.display='none';gstate='start';const ss=$$('start-screen');ss.style.display='flex';const inp=$$('player-name');if(inp){inp.value='';setTimeout(()=>inp.focus(),300);}}
+function ascendNext(){lvl++;usedQids=new Set();tryCatchUsed=false;nodesThisLvl=0;prismFailed=false;repUsed=false;mapNodes=generateMap();visited=new Set([0]);curId=0;bossHp=0;bossQIdx=0;updHUD();$$('win').style.display='none';gstate='map';}
+function startGame(){const inp=$$('player-name');playerName=(inp&&inp.value.trim())||'Adventurer';$$('name-row').textContent=playerName;$$('go-name').textContent=playerName+' fell in battle...';usedQids=new Set();tryCatchUsed=false;nodesThisLvl=0;prismFailed=false;repUsed=false;$$('start-screen').style.display='none';mapNodes=generateMap();visited=new Set([0]);curId=0;gstate='map';}
+function goToStart(){lvl=1;hp=80;maxHP=80;gold=0;inv={elim:0,hint:0};activeRelics=new Set();upgradedRelics=new Set();relicPool=['sprite','coin','wronghat','beermug','which','trycatch','sample','cumsum','sdrel','glimpse','rep'];bossHp=0;bossQIdx=0;usedQids=new Set();studyBonus=false;fairyHintPending=false;activeId=null;elimIdx=-1;hintShown=false;activeQ=null;updHUD();['win','go'].forEach(id=>$$(id).style.display='none');$$('ov').style.display='none';$$('relic-overlay').style.display='none';const wr=$$('win-retire');if(wr)wr.style.display='none';gstate='start';const ss=$$('start-screen');ss.style.display='flex';const inp=$$('player-name');if(inp){inp.value='';setTimeout(()=>inp.focus(),300);}}
 
 $$('ov-inp').addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Enter')submitTxt();});
 $$('player-name').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();startGame();}});
